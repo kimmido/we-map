@@ -1,0 +1,34 @@
+.App {
+  display: flex;  
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 390px;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: darkblue;
+}
+
+.container {
+  width: 100%;
+  padding: 0 16px;
+  background-color: rosybrown;
+}
+
+#map {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.location {
+  position: absolute;
+  right: 16px; bottom: 16px;
+  width: 58px; height: 58px;
+  background-color: blue;
+  z-index: 20;
+}
+
+.gnb {
+  height: 92px;
+  background-color: #fff;
+}
