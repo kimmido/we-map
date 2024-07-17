@@ -4,7 +4,7 @@ import './Map.css';
 const { kakao } = window; // 함수형 컴포넌트에서 kakao를 window 전역 객체로 인지 시키기
 
 function Map(props) {
-  const { markerPositions, userPosition } = props;
+  const { markerPositions, goalPosition } = props;
   const [, setMarkers] = useState([]);
   const [map, setMap] = useState(null);
 
@@ -23,9 +23,11 @@ function Map(props) {
     if (map === null) {
       return;
     }
-    map.setCenter(userPosition);
-  }, [userPosition]);
+    map.setCenter(goalPosition);
+  }, [goalPosition]);
   
+
+  // 마커 표시 영역으로 이동
   useEffect(() => {
     if (map === null) {
       return;

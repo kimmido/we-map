@@ -7,12 +7,18 @@ const { kakao } = window; // 함수형 컴포넌트에서 kakao를 window 전역
 
 function App() {
   // const [map, setMap] = useState(null);
-  const [userPosition, setuserPosition] = useState({ lat: 33.450701, lng: 126.570667 });
+  const [goalPosition, setGoalPosition] = useState(null);
+  const [userPosition, setUserPosition] = useState(null);
   // const [locationError, setLocationError] = useState(null);
 
   useEffect(() => {
     goToUserPosition()
   }, [])
+
+  // const goToUserPosition = useEffect(() => {
+  //   findUserPosition();
+    
+  // }, []);
   
   const goToUserPosition = useCallback(() => {
     if (navigator.geolocation) { // geolocation을 지원한다면
@@ -31,8 +37,9 @@ function App() {
 
     const locPosition = new kakao.maps.LatLng(lat, lng);
 
-    setuserPosition(locPosition);
-  }, []);
+    setUserPosition(locPosition);
+    setGoalPosition(locPosition);
+  }, [goToUserPosition]);
 
   const errorLocation = useCallback((e) => {
     let print;
@@ -55,59 +62,8 @@ function App() {
     }
     console.log(print);
     console.log(e.code, e.message);
-  }, []);
+  }, [goToUserPosition]);
 
-
-  // const goToUserPosition = useEffect(() => {
-  //   console.log('위치 찾기')
-  //   // 사용자의 위치 찾기
-  //   // Geolocation API = navigator.gelocation
-  //   if (navigator.geolocation) { // geolocation을 지원한다면
-  //       // getCurrentPosition: 첫 번째 인자 - 사용자의 위도, 경도 반환 / 요청이 실패했을 때 두 번째 인자 - PositionError객체 를 받는다
-  //       navigator.geolocation.getCurrentPosition(
-  //         (pos) => successLocation(pos), 
-  //         (error) => errorLocation(error));
-  //   }else{
-  //     alert("현재 사용중이신 브라우저가 위치찾기 기능을 지원하지 않습니다.")
-  //   }
-
-  //   // 위치 찾기 성공
-  //   function successLocation(pos) {  // 성공했을때 실행
-  //     const lat = pos.coords.latitude;
-  //     const lng = pos.coords.longitude;
-
-  //     const locPosition = new kakao.maps.LatLng(lat, lng)
-  //     // ,message = '<div style="padding:5px;">여기에 계신가요?!</div>';
-    
-  //     setuserPosition(locPosition);
-  //     console.log(lat, lng);
-  //   // displayMarker(locPosition, message);
-  //   }
-
-  //   // 위치 찾기 실패
-  //   function errorLocation(e) { // 실패했을때 실행
-  //   let print;
-  //   switch(e.code) {
-  //     case e.PERMISSION_DENIED: // 1
-  //     print = "이 문장은 사용자가 Geolocation API의 사용 요청을 거부했을 때 나타납니다!"
-  //     break;
-
-  //     case e.POSITION_UNAVAILABLE: // 2
-  //     print = "이 문장은 가져온 위치 정보를 사용할 수 없을 때 나타납니다!"
-  //     break;
-
-  //     case e.TIMEOUT: // 3
-  //     print = "이 문장은 위치 정보를 가져오기 위한 요청이 허용 시간을 초과했을 때 나타납니다!"
-  //     break;
-
-  //     case e.UNKNOWN_ERROR:
-  //     print = "이 문장은 알 수 없는 오류가 발생했을 때 나타납니다!"
-  //     break;
-  //   }
-  //   console.log(print);
-  //   console.log(e.code, e.message);
-  //   }
-  // }, []);
 
   const [markerPositions, setMarkerPositions] = useState([]);
   const markerPositions1 = [
@@ -132,7 +88,7 @@ function App() {
         <input className='search' type='search' />
         <input className='submit' type='submit' />
       </form>
-      <Map markerPositions={markerPositions} userPosition={userPosition} />
+      <Map markerPositions={markerPositions} goalPosition={goalPosition} />
       <button onClick={() => setMarkerPositions(markerPositions1)}>
           Marker Set 1
         </button>
