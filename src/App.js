@@ -10,11 +10,11 @@ function App() {
   const [userPosition, setuserPosition] = useState({ lat: 33.450701, lng: 126.570667 });
   // const [locationError, setLocationError] = useState(null);
 
-  const goToUserPosition = useEffect(() => {
-    findUserPosition();
+  useEffect(() => {
+    goToUserPosition()
   }, [])
   
-  const findUserPosition = useCallback(() => {
+  const goToUserPosition = useCallback(() => {
     if (navigator.geolocation) { // geolocation을 지원한다면
       // getCurrentPosition: 첫 번째 인자 - 사용자의 위도, 경도 반환 / 요청이 실패했을 때 두 번째 인자 - PositionError객체 를 받는다
       navigator.geolocation.getCurrentPosition(
@@ -32,7 +32,6 @@ function App() {
     const locPosition = new kakao.maps.LatLng(lat, lng);
 
     setuserPosition(locPosition);
-    return locPosition;
   }, []);
 
   const errorLocation = useCallback((e) => {
