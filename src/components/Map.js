@@ -1,84 +1,73 @@
 import { useEffect, useState, useRef } from 'react';
+import './Map.css';
 
 const { kakao } = window; // 함수형 컴포넌트에서 kakao를 window 전역 객체로 인지 시키기
 
 function Map(props) {
-  const { markerPositions, size } = props;
-  const [kakaoMap, setKakaoMap] = useState(null);
+  const { markerPositions, userPosition } = props;
   const [, setMarkers] = useState([]);
+  const [map, setMap] = useState(null);
 
-  const container = useRef();
+  const container = useRef(null);
 
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src =
-      "https://dapi.kakao.com/v2/maps/sdk.js?appkey=326e38503f420e1f0088dab1f46dc0c7&autoload=false";
-    document.head.appendChild(script);
-
-    script.onload = () => {
-      kakao.maps.load(() => {
-        const center = new kakao.maps.LatLng(37.50802, 127.062835);
-        const options = {
-          center,
-          level: 3
-        };
-        const map = new kakao.maps.Map(container.current, options);
-        //setMapCenter(center);
-        setKakaoMap(map);
-      });
+  useEffect(() => {  
+    const options = {
+      center: new kakao.maps.LatLng(37.50802, 127.062835),
+      level: 3
     };
-  }, [container]);
+    const map = new kakao.maps.Map(container.current, options);
+    setMap(map);
+  }, []);
 
   useEffect(() => {
-    container.current.style.width = `100%`;
-    container.current.style.height = `100%`;
-  }, [])
-
-  useEffect(() => {
-    if (kakaoMap === null) {
+    if (map === null) {
       return;
     }
-
-    // save center position
-    const center = kakaoMap.getCenter();
-
-    // relayout and...
-    kakaoMap.relayout();
-    // restore
-    kakaoMap.setCenter(center);
-  }, [kakaoMap]);
-
+    map.setCenter(userPosition);
+  }, [userPosition]);
+  
   useEffect(() => {
-    if (kakaoMap === null) {
+    if (map === null) {
       return;
     }
-
+    
+    // 좌표 저장
     const positions = markerPositions.map(pos => new kakao.maps.LatLng(...pos));
 
+    // marker들을 저장하여 리렌더링
     setMarkers(markers => {
       // clear prev markers
       markers.forEach(marker => marker.setMap(null));
 
       // assign new markers
       return positions.map(
-        position => new kakao.maps.Marker({ map: kakaoMap, position })
+        position => new kakao.maps.Marker({ map: map, position })
       );
     });
 
+
+    // bounds = new kakao.maps.LatLngBounds() 초기값
+    // latlng = positon[0], positon[1], ...
+    // bounds = [...bounds, latlng[0], latlng[1], ...]
     if (positions.length > 0) {
       const bounds = positions.reduce(
         (bounds, latlng) => bounds.extend(latlng),
         new kakao.maps.LatLngBounds()
       );
 
-      kakaoMap.setBounds(bounds);
+      // 주어진 영역을 화면 안에 나타내기
+      map.setBounds(bounds);
     }
-  }, [kakaoMap, markerPositions]);
+  }, [map, markerPositions]);
 
 
   return (
     <div className="Map">
-      <div id="container" ref={container} />;
+      <div id="container" ref={container} style={{
+        widows: '100%',
+        height: '100%',
+        background: '#ccc',
+      }}/>
     </div>
   );
 }
