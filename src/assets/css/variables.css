@@ -1,0 +1,21 @@
+:root {
+    --spacer-1: 2px;
+    --spacer-2: 4px;
+    --spacer-3: 8px;
+    --spacer-4: 12px;
+    --spacer-5: 16px;
+    --spacer-6: 20px;
+    --spacer-7: 24px;
+    --spacer-8: 32px;
+    --spacer-9: 40px;
+    --spacer-10: 48px;
+
+    --gnb-H: 92px;
+
+    --z-index-base: 10;
+    --z-index-con: 20;
+    --z-index-gnb: 30;
+    --z-index-popup-background: 60;
+    --z-index-popup: 70;
+    --z-index-top: 100;
+  }

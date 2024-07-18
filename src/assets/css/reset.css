@@ -1,0 +1,71 @@
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+textarea,
+p,
+blockquote,
+th,
+td,
+input,
+select,
+button,
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+button {
+border: none;
+cursor: pointer;
+}
+
+dl,
+ul,
+ol,
+menu,
+li {
+    list-style: none;
+}
+
+input,
+select,
+textarea {
+    font-size: 100%;
+    vertical-align: middle;
+}
+
+button {
+    font-size: 100%;
+    vertical-align: middle;
+    border: 0 none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+html, body{
+    -webkit-text-size-adjust : none; 
+    -ms-text-size-adjust : none; 
+    -moz-text-size-adjust : none; 
+    -o-text-size-adjust : none;
+}
+
+html{
+    font-size: 16px;
+}

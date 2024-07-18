@@ -1,6 +1,11 @@
-import './App.css';
 import React, { useEffect, useState, useRef, useCallback } from 'react';
+import './assets/css/variables.css';
+import './assets/css/reset.css';
+import './assets/css/App.css';
 import Map from './components/Map';
+import SearchPage from './pages/SearchPage';
+import { Routes, Route, Router, Link } from 'react-router-dom';
+import MyLists from './pages/MyLists';
 
 
 const { kakao } = window; // 함수형 컴포넌트에서 kakao를 window 전역 객체로 인지 시키기
@@ -71,35 +76,29 @@ function App() {
     [33.452671, 126.574792],
     [33.451744, 126.572441]
   ];
-  const markerPositions2 = [
-    [37.499590490909185, 127.0263723554437],
-    [37.499427948430814, 127.02794423197847],
-    [37.498553760499505, 127.02882598822454],
-    [37.497625593121384, 127.02935713582038],
-    [37.49629291770947, 127.02587362608637],
-    [37.49754540521486, 127.02546694890695],
-    [37.49646391248451, 127.02675574250912]
-  ];
+
   
 
   return (
     <div className="App">
-      <form className='searchboxform'>
-        <input className='search' type='search' />
-        <input className='submit' type='submit' />
-      </form>
-      <Map markerPositions={markerPositions} goalPosition={goalPosition} />
-      <button onClick={() => setMarkerPositions(markerPositions1)}>
-          Marker Set 1
-        </button>
-      <button className='userPositionBtn' onClick={goToUserPosition}></button>
-      <div className='gnb'>
-        <div className='container'>
-          <div className='list'></div>
-          <div className='home'></div>
-          <div className='my'></div>
-        </div>
+      <div className='contentsBox'>
+        <SearchPage />
+        <Map markerPositions={markerPositions} goalPosition={goalPosition} />
+        {/* <button onClick={() => setMarkerPositions(markerPositions1)}>
+            Marker Set 1
+          </button> */}
+        <button className='userPositionBtn' onClick={goToUserPosition}></button>
       </div>
+
+      <ul className='gnb'>
+        <li><Link className='gnbLink' to={'/MyLists'}> 내 목록</Link></li>
+        <li><Link className='gnbLink' to={'/'}> 홈</Link></li>
+      </ul>
+
+      <Routes>
+        <Route path="/MyLists" element={<MyLists />} />
+        <Route path="/" element={<Map />} />
+      </Routes>
     </div>
   );
 }
