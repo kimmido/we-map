@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import './Map.css';
+import '../assets/css/Map.css';
 
 const { kakao } = window; // 함수형 컴포넌트에서 kakao를 window 전역 객체로 인지 시키기
 
@@ -65,11 +65,7 @@ function Map(props) {
 
   return (
     <div className="Map">
-      <div id="container" ref={container} style={{
-        widows: '100%',
-        height: '100%',
-        background: '#ccc',
-      }}/>
+      <div id="container" ref={container}/>
     </div>
   );
 }
