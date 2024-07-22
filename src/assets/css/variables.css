@@ -9,13 +9,20 @@
     --spacer-8: 32px;
     --spacer-9: 40px;
     --spacer-10: 48px;
-
-    --gnb-H: 92px;
-
+    
     --z-index-base: 10;
     --z-index-con: 20;
     --z-index-gnb: 30;
     --z-index-popup-background: 60;
     --z-index-popup: 70;
     --z-index-top: 100;
+    
+    --size-btn-small: 30px;
+    --size-btn-medium: 44px;
+    --size-btn-large: 50px;
+    --size-btn-xlarge: 57px;
+    
+    --gnb-H: 64px;
+
+    --top-btn: 48px;
   }

@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
+import Home from './pages/Home';
+import MyListsBoard from './pages/MyListsBoard';
+import SearchPage from './pages/SearchPage';
 import './assets/css/variables.css';
 import './assets/css/reset.css';
 import './assets/css/App.css';
-import Map from './components/Map';
-import SearchPage from './pages/SearchPage';
-import { Routes, Route, Router, Link } from 'react-router-dom';
-import MyLists from './pages/MyLists';
 
 
 const { kakao } = window; // 함수형 컴포넌트에서 kakao를 window 전역 객체로 인지 시키기
@@ -17,20 +17,26 @@ function App() {
   // const [locationError, setLocationError] = useState(null);
 
   useEffect(() => {
-    goToUserPosition()
+      goToUserPosition();
   }, [])
-
-  // const goToUserPosition = useEffect(() => {
-  //   findUserPosition();
-    
-  // }, []);
   
+  // const goToUserPosition = useEffect(() => {
+    //   findUserPosition();
+    
+    // }, []);
+
   const goToUserPosition = useCallback(() => {
     if (navigator.geolocation) { // geolocation을 지원한다면
-      // getCurrentPosition: 첫 번째 인자 - 사용자의 위도, 경도 반환 / 요청이 실패했을 때 두 번째 인자 - PositionError객체 를 받는다
       navigator.geolocation.getCurrentPosition(
-        (pos) => successLocation(pos), 
-        (error) => errorLocation(error));
+        (pos) => { // 위치 찾기 성공{위도, 경도}
+          const lat = pos.coords.latitude;
+          const lng = pos.coords.longitude;
+
+          const locPosition = new kakao.maps.LatLng(lat, lng);
+          
+          setGoalPosition(locPosition);
+        }, 
+        (error) => {errorLocation(error)})
     }else{
       alert("현재 사용중이신 브라우저가 위치찾기 기능을 지원하지 않습니다.")
     }
@@ -81,24 +87,25 @@ function App() {
 
   return (
     <div className="App">
+
       <div className='contentsBox'>
-        <SearchPage />
-        <Map markerPositions={markerPositions} goalPosition={goalPosition} />
-        {/* <button onClick={() => setMarkerPositions(markerPositions1)}>
-            Marker Set 1
-          </button> */}
-        <button className='userPositionBtn' onClick={goToUserPosition}></button>
+        
+        <Routes>
+          <Route path="/MyListsBoard" element={<MyListsBoard />} />
+          <Route 
+            path="/" 
+            element={<Home goalPosition={goalPosition} markerPositions={markerPositions} goToUserPosition={goToUserPosition} />} />
+          <Route path="/SearchPage" element={<SearchPage />} />
+        </Routes>
       </div>
 
-      <ul className='gnb'>
-        <li><Link className='gnbLink' to={'/MyLists'}> 내 목록</Link></li>
-        <li><Link className='gnbLink' to={'/'}> 홈</Link></li>
-      </ul>
-
-      <Routes>
-        <Route path="/MyLists" element={<MyLists />} />
-        <Route path="/" element={<Map />} />
-      </Routes>
+      <nav className='gnb'>
+        <Link to={'/MyListsBoard'}>리스트</Link>
+        <Link to={'/'}>홈</Link>
+      </nav>
+      {/* <button onClick={() => setMarkerPositions(markerPositions1)}>
+          Marker Set 1
+        </button> */}
     </div>
   );
 }
