@@ -1,0 +1,40 @@
+h2 {
+    margin: 24px 0;
+    font-size: 20px;
+    text-align: center;
+}
+
+.listInsertBtn {
+    display: block;
+    width: 100%;
+    height: var(--size-btn-medium);
+    border-radius: 100px;
+    background-color: rgb(155, 206, 255);
+}
+
+.MyList {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 10px;
+    padding: var(--spacer-5) 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.listIcon {
+    display: block;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background-color: darkgoldenrod;
+}
+
+.listInfo {
+    width: 80%;
+}
+
+.listName {
+    display: block;
+}
+
+.listEditBtn {
+    display: block;
+}

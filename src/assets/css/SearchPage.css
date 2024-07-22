@@ -1,18 +1,17 @@
 
 .SearchPage {
-    position: absolute;
-    left: var(--spacer-3); top: var(--spacer-3);
-    width: calc(100% - var(--spacer-3) * 2);
-    height: 48px;
-
+    width: 100%;
+    height: 100%;
+    
     z-index: 20;
 }
 
 .searchForm {
-    width: 100%;
-    height: 100%;
     display: flex;
     justify-content: space-between;
+    width: calc(100% - var(--spacer-3) * 2);
+    height: 48px;
+    margin: var(--spacer-3);
 }
 
 .search {

@@ -19,6 +19,7 @@ function Map(props) {
     setMap(map);
   }, []);
 
+  // 목표 위치로 이동
   useEffect(() => {
     if (map === null) {
       return;
@@ -26,7 +27,6 @@ function Map(props) {
     map.setCenter(goalPosition);
   }, [goalPosition]);
   
-
   // 마커 표시 영역으로 이동
   useEffect(() => {
     if (map === null) {
