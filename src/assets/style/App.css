@@ -23,6 +23,10 @@
   background-color: #222;
 
   z-index: 20;
+  
+  /* 아이콘 속성 */
+  color: var(--gray-0);
+  font-size: 36px;
 }
 
 .gnb {
