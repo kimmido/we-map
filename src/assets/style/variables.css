@@ -17,6 +17,7 @@
     --z-index-popup: 70;
     --z-index-top: 100;
     
+    /* 크기 */
     --size-btn-small: 30px;
     --size-btn-medium: 44px;
     --size-btn-large: 50px;
@@ -25,4 +26,18 @@
     --gnb-H: 64px;
 
     --top-btn: 48px;
+
+    /* 색상 */
+    --gray-0: #ffffff;
+    --gray-5: #f8f8f8;
+    --gray-10: #f0f0f0;
+    --gray-20: #e4e4e4;
+    --gray-30: #d8d8d8;
+    --gray-40: #c6c6c6;
+    --gray-50: #8e8e8e;
+    --gray-60: #717171;
+    --gray-70: #555555;
+    --gray-80: #2d2d2d;
+    --gray-90: #1d1d1d;
+    --gray-100: #000000;
   }

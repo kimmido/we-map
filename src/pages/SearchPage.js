@@ -1,66 +1,75 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { FaArrowLeft } from "react-icons/fa";
+import SearchItem from '../components/SearchItem';
+import '../assets/style/SearchPage.css'
 import { Link } from 'react-router-dom';
-import '../assets/css/SearchPage.css'
 
 const { kakao } = window; 
 
-function SearchPage() {
+const SearchPage = () => {
     const [keyword, setKeyword] = useState('');
-    const [searchResult, setSearchResult] = useState([]);
-    const places = new kakao.maps.services.Places();
-    // 키워드로 장소를 검색합니다
+    const [searchData, setSearchData] = useState([]);
     
-    // 키워드 검색을 요청하는 함수입니다
-    const searchPlaces = useCallback(() => {
-        if (!keyword.replace(/^\s+|\s+$/g, '')) {
+    const onChange = useCallback((e) => {
+        setKeyword(e.target.value);
+    }, [])
+    
+    // 키워드 검색 요청
+    const searchPlaces = useCallback((e) => {
+        e.preventDefault();
+        
+        if (keyword.replace(/^\s+|\s+$/g, '') === '') {
             alert('검색어를 입력해주세요!');
-            return false;
+            return false;   
         }
-
+        
+        const places = new kakao.maps.services.Places();
         // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-        places.keywordSearch( keyword, placesSearchCB, {size: 5}); 
+        places.keywordSearch( keyword, searchResult, {size: 5}); 
+        console.log(searchData);
     }, [keyword]);
 
-    searchPlaces();
+    // 장소검색 결과
+    const searchResult = useCallback(
+        (data, status) => {
+            const kakaoMap = kakao.maps.services.Status;
 
-    // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
-    const placesSearchCB = useCallback(
-        (data, status, pagination) => {
-        if (status === kakao.maps.services.Status.OK) {
-            setSearchResult(data);
-            // 정상적으로 검색이 완료됐으면
-            // 검색 목록과 마커를 표출합니다
-            // displayPlaces(data);
+            switch (status) {
+                case kakaoMap.OK:
+                    setSearchData(data);
+                    break;
 
-            // 페이지 번호를 표출합니다
-            // displayPagination(pagination);
+                case kakaoMap.ZERO_RESULT:
+                    alert('검색 결과가 존재하지 않습니다.');
+                    break;
 
-        } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+                case kakaoMap.ERROR:
+                    alert('검색 결과 중 오류가 발생했습니다.');
+                    break;
 
-            alert('검색 결과가 존재하지 않습니다.');
-            return;
-
-        } else if (status === kakao.maps.services.Status.ERROR) {
-
-            alert('검색 결과 중 오류가 발생했습니다.');
-            return;
-
-        }
+                default: 
+                    break;
+            }
     }, [])
 
     return (
         <div className='SearchPage'>
-            <form className='searchForm' onsubmit={searchPlaces}>
-                <div>뒤로가기</div>
-                <input className='search' value={keyword} type='search' onChange={(e) => setKeyword(e.target.value)} />
-                <input className='submit' type='submit' />
-            </form>
-            <div id="menu_wrap" class="bg_white">
-            <div class="option">
+            <div className='flexBox'>
+                <Link to={'/'} className='backBtn'><FaArrowLeft /></Link>
+                <form className='searchForm' onSubmit={searchPlaces}>
+                    <input className='search' value={keyword} type='search' onChange={onChange} />
+                </form>
             </div>
-            <ul id="placesList"></ul>
-            <div id="pagination"></div>
-        </div>
+            <ul className="searchList">
+                {
+                    searchData.map((data, idx) => (
+                        <SearchItem 
+                            key={idx}
+                            name={data.place_name}
+                            address={data.address_name} />
+                    ))
+                }
+            </ul>
         </div>
     );
 }

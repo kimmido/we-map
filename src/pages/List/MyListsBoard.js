@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PlacesList from './PlacesList';
-import '../assets/css/MyListsBoard.css'
+import '../../assets/style/MyListsBoard.css'
 import { FiMoreVertical } from "react-icons/fi";
 import { TiLocation } from "react-icons/ti";
 
