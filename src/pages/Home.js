@@ -52,11 +52,13 @@ function Home(props) {
         console.log(print);
         console.log(e.code, e.message);
     }, [goToUserPosition]);
-    
+
     return (
         <div className='Home'>
             <Link className='SearchEntry' to={'/SearchPage'}>검색창</Link>
-            <Map goalPosition={goalPosition} markerPositions={markerPositions} />
+            <Map 
+                goalPosition={goalPosition} 
+                markerPositions={markerPositions} />
             <button className='userPositionBtn' onClick={goToUserPosition}><TiLocationArrow /></button>
         </div>
     );
