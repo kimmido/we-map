@@ -6,17 +6,19 @@ import { TiLocationArrow } from "react-icons/ti";
 const { kakao } = window; // 함수형 컴포넌트에서 kakao를 window 전역 객체로 인지 시키기
 
 function Home(props) {
-    const { goalPosition, setGoalPosition } = props;
+    // const { goalPosition, setGoalPosition } = props;
+    const [ userPosition, setUserPosition ] = useState(null);
     const path = useLocation().pathname;
 
-    useEffect(() => {
-        if(path == '/') {
+    // useEffect(() => {
+    //     if(path == '/') {
             
-            goToUserPosition();
-        }
-    }, [])
+    //         goToUserPosition();
+    //     }
+    // }, [])
 
     const goToUserPosition = useCallback(() => {
+        console.log("home.js callback");
         if (navigator.geolocation) { // geolocation을 지원한다면
         navigator.geolocation.getCurrentPosition(
             (pos) => { // 위치 찾기 성공{위도, 경도}
@@ -25,7 +27,8 @@ function Home(props) {
 
             const locPosition = new kakao.maps.LatLng(lat, lng);
             
-            setGoalPosition(locPosition);
+            setUserPosition(locPosition);
+            // console.log(goalPosition);
             }, 
             (error) => {errorLocation(error)})
         }else{
@@ -60,7 +63,7 @@ function Home(props) {
         <div className='Home'>
             <Link className='SearchEntry' to={'/search'}>검색창</Link>
             <Map 
-                goalPosition={goalPosition} />
+                goalPosition={userPosition} />
             <button className='userPositionBtn' onClick={goToUserPosition}><TiLocationArrow /></button>
         </div>
     );

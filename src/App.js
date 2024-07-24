@@ -11,7 +11,7 @@ import './assets/style/App.css';
 
 
 function App() {
-  const [goalPosition, setGoalPosition] = useState(null);
+  // const [goalPosition, setGoalPosition] = useState(null);
   
   // const [markerPositions, setMarkerPositions] = useState([]);
   // const markerPositions1 = [
@@ -32,15 +32,11 @@ function App() {
           <Route 
             path="/" 
             element={<Home
-              goalPosition={goalPosition}
-              setGoalPosition={setGoalPosition}
             />} />
           
           <Route
             path='/place/:placeId'
             element={<Place
-              goalPosition={goalPosition}
-              setGoalPosition={setGoalPosition}
             />} />
             
           <Route 
