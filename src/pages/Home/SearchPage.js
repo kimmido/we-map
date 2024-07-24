@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { FaArrowLeft } from "react-icons/fa";
-import SearchItem from '../components/SearchItem';
-import '../assets/style/SearchPage.css'
+import SearchItem from '../../components/SearchItem';
+import '../../assets/style/pages/SearchPage.css'
 import { Link } from 'react-router-dom';
 
 const { kakao } = window; 
 
 const SearchPage = () => {
-    const [keyword, setKeyword] = useState('');
+    const [keyword, setKeyword] = useState('역삼');
     const [searchData, setSearchData] = useState([]);
     
     const onChange = useCallback((e) => {
@@ -65,12 +65,16 @@ const SearchPage = () => {
                     searchData.map((data, idx) => (
                         <SearchItem 
                             key={idx}
+                            id={data.id}
+                            lat={data.x}
+                            lng={data.y}
                             name={data.place_name}
+                            phone={data.phone}
                             address={data.address_name} />
                     ))
                 }
             </ul>
-        </div>
+        </div> 
     );
 }
 
