@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Map from '../../components/Map';
 import { TiLocationArrow } from "react-icons/ti";
 
@@ -8,14 +8,14 @@ const { kakao } = window; // 함수형 컴포넌트에서 kakao를 window 전역
 function Home(props) {
     // const { goalPosition, setGoalPosition } = props;
     const [ userPosition, setUserPosition ] = useState(null);
-    const path = useLocation().pathname;
+    // const path = useLocation().pathname;
+    const [text, setText] = useState('');
 
-    // useEffect(() => {
-    //     if(path == '/') {
-            
-    //         goToUserPosition();
-    //     }
-    // }, [])
+    useEffect(() => {
+        setText('hi');
+        console.log(text);
+        goToUserPosition();
+    }, [])
 
     const goToUserPosition = useCallback(() => {
         console.log("home.js callback");
@@ -28,7 +28,7 @@ function Home(props) {
             const locPosition = new kakao.maps.LatLng(lat, lng);
             
             setUserPosition(locPosition);
-            // console.log(goalPosition);
+            console.log(userPosition);
             }, 
             (error) => {errorLocation(error)})
         }else{
@@ -57,13 +57,12 @@ function Home(props) {
         }
         console.log(print);
         console.log(e.code, e.message);
-    }, [goToUserPosition]);
+    }, []);
 
     return (
         <div className='Home'>
             <Link className='SearchEntry' to={'/search'}>검색창</Link>
-            <Map 
-                goalPosition={userPosition} />
+            <Map goalPosition={userPosition} />
             <button className='userPositionBtn' onClick={goToUserPosition}><TiLocationArrow /></button>
         </div>
     );
