@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import '../assets/style/Map.css';
+import '../assets/style/components/Map.css';
 
 const { kakao } = window;
 
@@ -8,14 +8,14 @@ function Map(props) {
   // const [, setMarkers] = useState([]);
   const [map, setMap] = useState(null);
 
-  const container = useRef(null);
+  const mapContainer = useRef(null);
 
   useEffect(() => {  
     const options = {
       center: new kakao.maps.LatLng(37.50802, 127.062835),
       level: 3
     };
-    const kakaoMap = new kakao.maps.Map(container.current, options);
+    const kakaoMap = new kakao.maps.Map(mapContainer.current, options);
     setMap(kakaoMap);
   }, []);
 
@@ -65,7 +65,7 @@ function Map(props) {
 
   return (
     <div className="Map">
-      <div id="container" ref={container}/>
+      <div className="mapContainer" ref={mapContainer}/>
     </div>
   );
 }

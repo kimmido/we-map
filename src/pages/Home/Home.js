@@ -1,16 +1,19 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import Map from '../components/Map';
+import { Link, useLocation } from 'react-router-dom';
+import Map from '../../components/Map';
 import { TiLocationArrow } from "react-icons/ti";
 
 const { kakao } = window; // 함수형 컴포넌트에서 kakao를 window 전역 객체로 인지 시키기
 
 function Home(props) {
-    const { markerPositions } = props;
-    const [goalPosition, setGoalPosition] = useState(null);
+    const { goalPosition, setGoalPosition } = props;
+    const path = useLocation().pathname;
 
     useEffect(() => {
-        goToUserPosition();
+        if(path == '/') {
+            
+            goToUserPosition();
+        }
     }, [])
 
     const goToUserPosition = useCallback(() => {
@@ -55,10 +58,9 @@ function Home(props) {
 
     return (
         <div className='Home'>
-            <Link className='SearchEntry' to={'/SearchPage'}>검색창</Link>
+            <Link className='SearchEntry' to={'/search'}>검색창</Link>
             <Map 
-                goalPosition={goalPosition} 
-                markerPositions={markerPositions} />
+                goalPosition={goalPosition} />
             <button className='userPositionBtn' onClick={goToUserPosition}><TiLocationArrow /></button>
         </div>
     );

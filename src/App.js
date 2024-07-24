@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
-import Home from './pages/Home';
+import Home from './pages/Home/Home';
 import MyListsBoard from './pages/List/MyListsBoard';
-import SearchPage from './pages/SearchPage';
-import Place from './pages/SearchPage';
+import SearchPage from './pages/Home/SearchPage';
+import Place from './pages/Place';
 import './assets/style/variables.css';
 import './assets/style/reset.css';
 import './assets/style/App.css';
@@ -11,6 +11,7 @@ import './assets/style/App.css';
 
 
 function App() {
+  const [goalPosition, setGoalPosition] = useState(null);
   
   // const [markerPositions, setMarkerPositions] = useState([]);
   // const markerPositions1 = [
@@ -25,31 +26,35 @@ function App() {
       <div className='contentsBox'>
         <Routes>
           <Route 
-            path="/MyListsBoard" 
+            path="/myListsBoard" 
             element={<MyListsBoard />} />
 
           <Route 
             path="/" 
-            element={<Home />}>
-          </Route>
+            element={<Home
+              goalPosition={goalPosition}
+              setGoalPosition={setGoalPosition}
+            />} />
           
           <Route
-            path='/search/place'
-            elemen={<Place />}>
-          </Route>
+            path='/place/:placeId'
+            element={<Place
+              goalPosition={goalPosition}
+              setGoalPosition={setGoalPosition}
+            />} />
             
           <Route 
-            path="/SearchPage" 
+            path="/search" 
             element={<SearchPage />} />
 
-          <Route 
+          {/* <Route 
             path="/Place" 
-            element={<Place />} />
+            element={<Place />} /> */}
         </Routes>
       </div>
 
       <nav className='gnb'>
-        <Link to={'/MyListsBoard'}>리스트</Link>
+        <Link to={'/myListsBoard'}>리스트</Link>
         <Link to={'/'}>홈</Link>
       </nav>
       {/* <button onClick={() => setMarkerPositions(markerPositions1)}>
