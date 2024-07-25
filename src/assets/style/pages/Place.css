@@ -1,0 +1,10 @@
+.PlacePopUp {
+    position: absolute;
+    bottom: var(--spacer-5); left: var(--spacer-5);
+    width: calc(100% - var(--spacer-5) * 2);
+    height: 100px;
+    border-radius: 15px;
+    background-color: #fff;
+  
+    z-index: 10;
+  }

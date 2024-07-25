@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import Map from '../../components/Map';
+import Gnb from '../../components/Gnb';
 import { TiLocationArrow } from "react-icons/ti";
 
 const { kakao } = window; // 함수형 컴포넌트에서 kakao를 window 전역 객체로 인지 시키기
@@ -24,7 +25,6 @@ function Home(props) {
             const locPosition = new kakao.maps.LatLng(lat, lng);
             
             setUserPosition(locPosition);
-            console.log(userPosition);
             console.log(userPosition);
             }, 
             (error) => {errorLocation(error)})
@@ -58,9 +58,12 @@ function Home(props) {
 
     return (
         <div className='Home'>
-            <Link className='SearchEntry' to={'/search'}>검색창</Link>
-            <Map goalPosition={userPosition} />
-            <button className='userPositionBtn' onClick={goToUserPosition}><TiLocationArrow /></button>
+            <div className='contentsBoxWithGnb'>
+                <Link className='SearchEntry' to={'/search'}>검색창</Link>
+                <Map goalPosition={userPosition} />
+                <button className='userPositionBtn' onClick={goToUserPosition}><TiLocationArrow /></button>
+            </div>
+            <Gnb />
         </div>
     );
 }

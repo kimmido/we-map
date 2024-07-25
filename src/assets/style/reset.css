@@ -80,5 +80,6 @@ a {
 }
 
 .contentsBox > div {
+    position: relative;
     height: 100%;
 }
