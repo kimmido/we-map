@@ -1,15 +1,21 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FaArrowLeft } from "react-icons/fa";
-import SearchItem from '../../components/SearchItem';
+import SearchItem from './SearchItem';
 import '../../assets/style/pages/SearchPage.css'
 import { Link } from 'react-router-dom';
+import Gnb from '../../components/Gnb';
 
 const { kakao } = window; 
 
 const SearchPage = () => {
     const [keyword, setKeyword] = useState('역삼');
     const [searchData, setSearchData] = useState([]);
-    
+    const searchInputRef = useRef(null);
+
+    useEffect(() => {
+        searchInputRef.current.focus();
+    }, [])
+
     const onChange = useCallback((e) => {
         setKeyword(e.target.value);
     }, [])
@@ -54,26 +60,29 @@ const SearchPage = () => {
 
     return (
         <div className='SearchPage'>
-            <div className='flexBox'>
-                <Link to={'/'} className='backBtn'><FaArrowLeft /></Link>
-                <form className='searchForm' onSubmit={searchPlaces}>
-                    <input className='search' value={keyword} type='search' onChange={onChange} />
-                </form>
+            <div className='contentsBoxWithGnb'>
+                <div className='flexBox'>
+                    <Link to={'/'} className='backBtn'><FaArrowLeft /></Link>
+                    <form className='searchForm' onSubmit={searchPlaces}>
+                        <input className='search' value={keyword} type='search' onChange={onChange} ref={searchInputRef} />
+                    </form>
+                </div>
+                <ul className="searchList">
+                    {
+                        searchData.map((data, idx) => (
+                            <SearchItem 
+                                key={idx}
+                                id={data.id}
+                                lat={data.y}
+                                lng={data.x}
+                                name={data.place_name}
+                                phone={data.phone}
+                                address={data.address_name} />
+                        ))
+                    }
+                </ul>
             </div>
-            <ul className="searchList">
-                {
-                    searchData.map((data, idx) => (
-                        <SearchItem 
-                            key={idx}
-                            id={data.id}
-                            lat={data.y}
-                            lng={data.x}
-                            name={data.place_name}
-                            phone={data.phone}
-                            address={data.address_name} />
-                    ))
-                }
-            </ul>
+            <Gnb />
         </div> 
     );
 }

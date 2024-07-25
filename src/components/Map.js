@@ -6,7 +6,7 @@ const { kakao } = window;
 function Map(props) {
   const { goalPosition } = props;
   console.log("Map.js - pos: " + goalPosition);
-  // const [, setMarkers] = useState([]);
+  const [, setMarkers] = useState([]);
   const [map, setMap] = useState(null);
 
   const mapContainer = useRef(null);
@@ -26,8 +26,19 @@ function Map(props) {
       return;
     }
     map.setCenter(goalPosition);
+    
+    const marker = new kakao.maps.Marker({
+      position: goalPosition
+    });
+    marker.setMap(map);
+
   }, [goalPosition]);
   
+
+
+  // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+  // marker.setMap(null);  
+
   // 마커 표시 영역으로 이동
   // useEffect(() => {
   //   if (map === null) {
