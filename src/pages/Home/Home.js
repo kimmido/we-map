@@ -6,14 +6,10 @@ import { TiLocationArrow } from "react-icons/ti";
 const { kakao } = window; // 함수형 컴포넌트에서 kakao를 window 전역 객체로 인지 시키기
 
 function Home(props) {
-    // const { goalPosition, setGoalPosition } = props;
+    console.log('Home.js 렌더링');
     const [ userPosition, setUserPosition ] = useState(null);
-    // const path = useLocation().pathname;
-    const [text, setText] = useState('');
 
     useEffect(() => {
-        setText('hi');
-        console.log(text);
         goToUserPosition();
     }, [])
 
@@ -28,6 +24,7 @@ function Home(props) {
             const locPosition = new kakao.maps.LatLng(lat, lng);
             
             setUserPosition(locPosition);
+            console.log(userPosition);
             console.log(userPosition);
             }, 
             (error) => {errorLocation(error)})

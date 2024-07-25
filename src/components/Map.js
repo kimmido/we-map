@@ -5,6 +5,7 @@ const { kakao } = window;
 
 function Map(props) {
   const { goalPosition } = props;
+  console.log("Map.js - pos: " + goalPosition);
   // const [, setMarkers] = useState([]);
   const [map, setMap] = useState(null);
 

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FaArrowLeft } from "react-icons/fa";
 import SearchItem from '../../components/SearchItem';
 import '../../assets/style/pages/SearchPage.css'
@@ -66,8 +66,8 @@ const SearchPage = () => {
                         <SearchItem 
                             key={idx}
                             id={data.id}
-                            lat={data.x}
-                            lng={data.y}
+                            lat={data.y}
+                            lng={data.x}
                             name={data.place_name}
                             phone={data.phone}
                             address={data.address_name} />
