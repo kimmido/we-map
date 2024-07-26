@@ -54,3 +54,7 @@ h2 {
 
     z-index: 10;
 }
+
+.PlaceListItem {
+    border-bottom: 1px solid var(--gray-10);
+}

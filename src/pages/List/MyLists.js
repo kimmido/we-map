@@ -2,12 +2,12 @@ import React from 'react';
 import MyListsItem from './MyListsItem';
 
 const MyLists = (props) => {
-    const { userData } = props;
+    const { userLists } = props;
 
     return (
         <div className='MyLists'>
             {
-                userData.user_lists.map((list) => (
+                userLists.map((list) => (
                     <MyListsItem
                         key={list.id}
                         id={list.id}

@@ -25,7 +25,6 @@ function Home(props) {
             const locPosition = new kakao.maps.LatLng(lat, lng);
             
             setUserPosition(locPosition);
-            console.log(userPosition);
             }, 
             (error) => {errorLocation(error)})
         }else{
