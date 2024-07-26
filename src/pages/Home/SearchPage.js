@@ -16,12 +16,12 @@ const SearchPage = () => {
         searchInputRef.current.focus();
     }, [])
 
-    const onChange = useCallback((e) => {
+    const onChangeKeword = useCallback((e) => {
         setKeyword(e.target.value);
     }, [])
     
     // 키워드 검색 요청
-    const searchPlaces = useCallback((e) => {
+    const submitPlaceSearch = useCallback((e) => {
         e.preventDefault();
         
         if (keyword.replace(/^\s+|\s+$/g, '') === '') {
@@ -63,8 +63,8 @@ const SearchPage = () => {
             <div className='contentsBoxWithGnb'>
                 <div className='flexBox'>
                     <Link to={'/'} className='backBtn'><FaArrowLeft /></Link>
-                    <form className='searchForm' onSubmit={searchPlaces}>
-                        <input className='search' value={keyword} type='search' onChange={onChange} ref={searchInputRef} />
+                    <form className='searchForm' onSubmit={submitPlaceSearch}>
+                        <input value={keyword} type='search' ref={searchInputRef} onChange={onChangeKeword} className='search' />
                     </form>
                 </div>
                 <ul className="searchList">

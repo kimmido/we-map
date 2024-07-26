@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Map from '../components/Map';
 import '../assets/style/pages/Place.css'
@@ -10,7 +10,7 @@ const { kakao } = window;
 const Place = () => {
     const [ placePosition, setPlacePosition ] = useState(null);
     const [ searchPlaceInfo ] = useState(useLocation().state);
-
+    
     useEffect(()=> {
         goToPlacePosition(searchPlaceInfo);
     }, [])
