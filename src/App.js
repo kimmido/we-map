@@ -136,8 +136,6 @@ function App() {
           path="/search" 
           element={<SearchPage />} />
       </Routes>
-      {/* <div className='contentsBox'> */}
-      {/* </div> */}
 
       {/* <Gnb /> */}
       {/* <button onClick={() => setMarkerPositions(markerPositions1)}>

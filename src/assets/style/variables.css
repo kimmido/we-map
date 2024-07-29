@@ -28,18 +28,20 @@
     --top-btn: 48px;
 
     /* 색상 */
-    --gray-0: #ffffff;
-    --gray-5: #f8f8f8;
-    --gray-10: #f0f0f0;
-    --gray-20: #e4e4e4;
-    --gray-30: #d8d8d8;
-    --gray-40: #c6c6c6;
-    --gray-50: #8e8e8e;
+    --gray-0: #ffffff; /* background */
+    --gray-5: #f8f8f8; /* background */
+    --gray-10: #f0f0f0; /* background */
+    --gray-20: #e4e4e4; /* disabled */
+    --gray-30: #d8d8d8; /* border */
+    --gray-40: #c6c6c6; /* border */
+    --gray-50: #8e8e8e; /* border & text-disabled & with white*/
     --gray-60: #717171;
-    --gray-70: #555555;
+    --gray-70: #555555; /* text-body */
     --gray-80: #2d2d2d;
-    --gray-90: #1d1d1d;
+    --gray-90: #1d1d1d; /* text-title */
     --gray-100: #000000;
 
     --shadow-popup: 0 -4px 6px rgba(0, 0, 0, .08);
+    --shadow-btn-top: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
+    --shadow-btn-on-map: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
   }
