@@ -12,8 +12,8 @@ const SearchBar = (props) => {
         <div className='SearchBar'>
             <div className='searchBarIcon'>
                 {
-                    path === '/search'? 
-                    <BackButton /> : <CiSearch />
+                    path === '/'? 
+                    <CiSearch /> : <BackButton />
                 }
             </div>
             <div className='searchBarCon'>
