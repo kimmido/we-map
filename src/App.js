@@ -104,8 +104,8 @@ function App() {
 
   return (
     <div className="App">
-
       <Routes>
+
         <Route 
           path="/mylists" 
           element={
@@ -126,7 +126,10 @@ function App() {
 
         <Route 
           path="/" 
-          element={<Home />} />
+          element={
+            <Home userLists={userLists} />
+            } 
+          />
         
         <Route
           path='/place/:placeId'
@@ -135,12 +138,8 @@ function App() {
         <Route 
           path="/search" 
           element={<SearchPage />} />
+      
       </Routes>
-
-      {/* <Gnb /> */}
-      {/* <button onClick={() => setMarkerPositions(markerPositions1)}>
-          Marker Set 1
-        </button> */}
     </div>
   );
 }
