@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import Map from '../components/Map';
 import '../assets/style/pages/Place.css'
 import PlacePopup from './PlacePopup';
-import BackButton from '../components/BackButton';
 import SearchBar from '../components/SearchBar';
 
 const { kakao } = window;

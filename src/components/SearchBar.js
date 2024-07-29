@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import BackButton from './BackButton';
 import { useLocation } from 'react-router-dom';
 import { CiSearch } from "react-icons/ci";

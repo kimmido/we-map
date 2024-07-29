@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Map from '../../components/Map';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import PlacesListPopup from './PlacesListPopup';
 import BackButton from '../../components/BackButton';
 
