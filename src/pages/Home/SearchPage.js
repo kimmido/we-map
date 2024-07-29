@@ -1,28 +1,21 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import SearchItem from './SearchItem';
 import '../../assets/style/pages/SearchPage.css'
 import Gnb from '../../components/Gnb';
-import BackButton from '../../components/BackButton';
+import SearchBar from '../../components/SearchBar';
 
 const { kakao } = window; 
 
 const SearchPage = () => {
-    const [keyword, setKeyword] = useState('역삼');
     const [searchData, setSearchData] = useState([]);
     const searchInputRef = useRef(null);
-
-    useEffect(() => {
-        searchInputRef.current.focus();
-    }, [])
-
-    const onChangeKeword = useCallback((e) => {
-        setKeyword(e.target.value);
-    }, [])
     
     // 키워드 검색 요청
     const submitPlaceSearch = useCallback((e) => {
         e.preventDefault();
-        
+        const keyword = searchInputRef.current;
+        console.log(keyword);
+
         if (keyword.replace(/^\s+|\s+$/g, '') === '') {
             alert('검색어를 입력해주세요!');
             return false;   
@@ -31,8 +24,7 @@ const SearchPage = () => {
         const places = new kakao.maps.services.Places();
         // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
         places.keywordSearch( keyword, searchResult, {size: 5}); 
-        console.log(searchData);
-    }, [keyword]);
+    }, []);
 
     // 장소검색 결과
     const searchResult = useCallback(
@@ -60,12 +52,9 @@ const SearchPage = () => {
     return (
         <div className='SearchPage'>
             <div className='contentsBoxWithGnb'>
-                <div className='flexBox'>
-                    <BackButton />
-                    <form className='searchForm' onSubmit={submitPlaceSearch}>
-                        <input value={keyword} type='search' ref={searchInputRef} onChange={onChangeKeword} className='search' />
-                    </form>
-                </div>
+                <SearchBar 
+                    searchInputRef={searchInputRef}
+                    handleSubmit={submitPlaceSearch} />
                 <ul className="searchList">
                     {
                         searchData.map((data, idx) => (

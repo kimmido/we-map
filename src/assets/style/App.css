@@ -60,7 +60,21 @@
   text-decoration: none;
 }
 
-.SearchEntry {
-  display: block;
-  height: var(--top-btn);
+.SearchBar {
+  position: absolute;
+  left: var(--spacer-5); top: var(--spacer-5);
+  display: flex;
+  width: calc(100% - var(--spacer-5) * 2);
+  height: var(--size-btn-small);
+  background-color: var(--gray-0);
+  /* border: 1px solid var(--gray-30); */
+  border-radius: 100px;
+  box-shadow: var(--shadow-btn-top);
+
+  z-index: 10;
 }
+
+/* .mlTpnb {
+  border-top: 1px solid #dadce0;
+  margin-left: 56px;
+} */

@@ -56,6 +56,7 @@ select,
 textarea {
     font-size: 100%;
     vertical-align: middle;
+    border: none;
 }
 
 button {
@@ -82,4 +83,8 @@ a {
 .contentsBox > div {
     position: relative;
     height: 100%;
+}
+
+.placeholder {
+    color: var(--gray-50);
 }

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Map from '../../components/Map';
 import Gnb from '../../components/Gnb';
 import { TiLocationArrow } from "react-icons/ti";
+import SearchBar from '../../components/SearchBar';
 
 const { kakao } = window; // 함수형 컴포넌트에서 kakao를 window 전역 객체로 인지 시키기
 
@@ -58,7 +59,9 @@ function Home(props) {
     return (
         <div className='Home'>
             <div className='contentsBoxWithGnb'>
-                <Link className='SearchEntry' to={'/search'}>검색창</Link>
+                <Link to={'/search'}>
+                    <SearchBar />
+                </Link>
                 <Map goalPosition={userPosition} />
                 <button className='userPositionBtn' onClick={goToUserPosition}><TiLocationArrow /></button>
             </div>

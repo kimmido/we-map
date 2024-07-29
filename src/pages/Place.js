@@ -4,14 +4,13 @@ import Map from '../components/Map';
 import '../assets/style/pages/Place.css'
 import PlacePopup from './PlacePopup';
 import BackButton from '../components/BackButton';
+import SearchBar from '../components/SearchBar';
 
 const { kakao } = window;
 
 const Place = () => {
     const [ placePosition, setPlacePosition ] = useState(null);
     const [ searchPlaceInfo ] = useState(useLocation().state);
-    const path = useLocation.search;
-    console.log('search: ' + path);
     
     useEffect(()=> {
         goToPlacePosition(searchPlaceInfo);
@@ -24,7 +23,8 @@ const Place = () => {
 
     return (
         <div className='Place'>
-            <BackButton />
+            <SearchBar
+                displayText={searchPlaceInfo.name} />
             <Map goalPosition={placePosition} />
             <PlacePopup
                 placeInfo={searchPlaceInfo} />
