@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../../assets/style/pages/MyListsBoard.css'
 
 import MyLists from './MyLists';

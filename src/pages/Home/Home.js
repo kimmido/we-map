@@ -8,7 +8,6 @@ import SearchBar from '../../components/SearchBar';
 const { kakao } = window; // 함수형 컴포넌트에서 kakao를 window 전역 객체로 인지 시키기
 
 function Home(props) {
-    console.log('Home.js 렌더링');
     const [ userPosition, setUserPosition ] = useState(null);
 
     useEffect(() => {

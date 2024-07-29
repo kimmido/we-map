@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { IoHeartCircle } from "react-icons/io5";
 import { TiLocation } from "react-icons/ti";
 import { FiMoreVertical } from "react-icons/fi";
