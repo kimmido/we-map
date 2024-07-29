@@ -3,7 +3,7 @@ import '../assets/style/components/Map.css';
 
 const { kakao } = window;
 
-function Map(props) {
+const Map = (props) => {
   const { goalPosition } = props;
   const [, setMarkers] = useState([]);
   const [map, setMap] = useState(null);

@@ -1,15 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Map from '../components/Map';
 import '../assets/style/pages/Place.css'
-import PlacePopup from '../components/PlacePopup';
-import { FaArrowLeft } from "react-icons/fa";
+import PlacePopup from './PlacePopup';
+import BackButton from '../components/BackButton';
 
 const { kakao } = window;
 
 const Place = () => {
     const [ placePosition, setPlacePosition ] = useState(null);
     const [ searchPlaceInfo ] = useState(useLocation().state);
+    const path = useLocation.search;
+    console.log('search: ' + path);
     
     useEffect(()=> {
         goToPlacePosition(searchPlaceInfo);
@@ -22,7 +24,7 @@ const Place = () => {
 
     return (
         <div className='Place'>
-            <Link to={'/search'}><FaArrowLeft /></Link>
+            <BackButton />
             <Map goalPosition={placePosition} />
             <PlacePopup
                 placeInfo={searchPlaceInfo} />
