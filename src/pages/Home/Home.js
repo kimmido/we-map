@@ -8,6 +8,7 @@ import SearchBar from '../../components/SearchBar';
 const { kakao } = window; // 함수형 컴포넌트에서 kakao를 window 전역 객체로 인지 시키기
 
 function Home(props) {
+    const { userLists } = props;
     const [ userPosition, setUserPosition ] = useState(null);
 
     useEffect(() => {
@@ -51,8 +52,6 @@ function Home(props) {
         print = "이 문장은 알 수 없는 오류가 발생했을 때 나타납니다!"
         break;
         }
-        console.log(print);
-        console.log(e.code, e.message);
     }, []);
 
     return (
@@ -61,8 +60,12 @@ function Home(props) {
                 <Link to={'/search'}>
                     <SearchBar />
                 </Link>
-                <Map goalPosition={userPosition} />
-                <button className='userPositionBtn' onClick={goToUserPosition}><TiLocationArrow /></button>
+                <Map 
+                    goalPosition={userPosition}
+                    userLists={userLists} />
+                <button className='userPositionBtn' onClick={goToUserPosition}>
+                    <TiLocationArrow />
+                </button>
             </div>
             <Gnb />
         </div>
