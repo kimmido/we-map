@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Map from '../../components/Map';
 import { Link, useParams } from 'react-router-dom';
 import PlacesListPopup from './PlacesListPopup';
+import BackButton from '../../components/BackButton';
 
 const PlacesListView = (props) => {
     const { userData, userLists, listData } = props;
@@ -10,7 +11,7 @@ const PlacesListView = (props) => {
 
     return (
         <div className='PlacesListView'>
-            <Link to={'/mylists'}>뒤로가기</Link>
+            <BackButton />
             <Map />
             <PlacesListPopup 
                 selectedListData={selectedListData}

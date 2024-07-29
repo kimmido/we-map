@@ -1,9 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { FaArrowLeft } from "react-icons/fa";
 import SearchItem from './SearchItem';
 import '../../assets/style/pages/SearchPage.css'
-import { Link } from 'react-router-dom';
 import Gnb from '../../components/Gnb';
+import BackButton from '../../components/BackButton';
 
 const { kakao } = window; 
 
@@ -62,7 +61,7 @@ const SearchPage = () => {
         <div className='SearchPage'>
             <div className='contentsBoxWithGnb'>
                 <div className='flexBox'>
-                    <Link to={'/'} className='backBtn'><FaArrowLeft /></Link>
+                    <BackButton />
                     <form className='searchForm' onSubmit={submitPlaceSearch}>
                         <input value={keyword} type='search' ref={searchInputRef} onChange={onChangeKeword} className='search' />
                     </form>
