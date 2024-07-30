@@ -8,11 +8,13 @@ const PlacesListView = (props) => {
     const { userData, userLists, listData } = props;
     const { placelistId } = useParams();
     let selectedListData = userLists.find(list => placelistId == list.id);
+    console.log(selectedListData);
+
 
     return (
         <div className='PlacesListView'>
             <BackButton />
-            <Map />
+            <Map userLists={selectedListData} />
             <PlacesListPopup 
                 selectedListData={selectedListData}
                 userData={userData} />
