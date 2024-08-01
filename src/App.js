@@ -19,14 +19,12 @@ function App() {
   }, []);
 
   async function dataBase() {
-    let { data: recode, error } = await supabase
-    .from('page')
+    let { data: user, error } = await supabase
+    .from('user')
     .select('*');
 
-    setCountries(recode);
-    console.log("countries: " + countries);
-    console.log(recode);
-    console.log("error: " + error);
+    setCountries(user);
+    console.log(countries);
   }
 
   async function recodeHandler() {
