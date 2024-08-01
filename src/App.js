@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import MyListsBoard from './pages/List/MyListsBoard';
@@ -8,10 +8,40 @@ import './assets/style/variables.css';
 import './assets/style/reset.css';
 import './assets/style/App.css';
 import PlacesListView from './pages/List/PlacesListView';
+import { createClient } from '@supabase/supabase-js'
 
-
+const SUPABASE_URL = process.env.REACT_APP_SUPABASE_URL;
+const SUPABASE_KEY= process.env.REACT_APP_SUPABASE_KEY;
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 function App() {
+  const [countries, setCountries] = useState([]);
+  const [refresh, setRefresh] = useState(false);
+  
+  useEffect(() => {
+    dataBase();
+  }, [refresh]);
+
+  async function dataBase() {
+    let { data: recode, error } = await supabase
+    .from('page')
+    .select('*');
+
+    setCountries(recode);
+    console.log("countries: " + countries);
+    console.log(recode);
+    console.log("error: " + error);
+  }
+
+  async function recodeHandler() {
+    const { data, error } = await supabase
+    .from('page')
+    .insert([
+      { title: prompt('title?'), body: prompt('body?') },
+    ]);
+    setRefresh(!refresh);
+  }
+
   const USER_DATA = {
     id: 'USER_1',
     name: '동글이',
@@ -97,6 +127,10 @@ function App() {
       ]
     }
   ];
+
+  useEffect(() => {
+
+  })
 
   const [listData] = useState(LIST_DATA);
   const [userData] = useState(USER_DATA);
