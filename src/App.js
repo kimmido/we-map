@@ -8,33 +8,36 @@ import './assets/style/variables.css';
 import './assets/style/reset.css';
 import './assets/style/App.css';
 import PlacesListView from './pages/List/PlacesListView';
-import { supabase } from './utils/supabaseClient';
+import { supabase } from "./utils/supabaseClient";
 
 function App() {
-  const [countries, setCountries] = useState([]);
-  const [refresh, setRefresh] = useState(false);
+  const [user, setUser] = useState([]);
   
   useEffect(() => {
-    dataBase();
+    getUserInfo();
   }, []);
 
-  async function dataBase() {
+  useEffect(() => {
+    console.log(user.id);
+  }, [user]);
+  
+  async function getUserInfo() {
     let { data: user, error } = await supabase
-    .from('user')
-    .select('*');
+    .from('users')
+    .select('*')
+    .eq('name', '동글이');
 
-    setCountries(user);
-    console.log(countries);
+    setUser(user[0]);
   }
 
-  async function recodeHandler() {
-    const { data, error } = await supabase
-    .from('page')
-    .insert([
-      { title: prompt('title?'), body: prompt('body?') },
-    ]);
-    setRefresh(!refresh);
-  }
+  
+  // async function recodeHandler() {
+  //   const { data, error } = await supabase
+  //   .from('page')
+  //   .insert([
+  //     { title: prompt('title?'), body: prompt('body?') },
+  //   ]);
+  // }
 
   const USER_DATA = {
     id: 'USER_1',
@@ -135,30 +138,31 @@ function App() {
       <Routes>
 
         <Route 
-          path="/mylists" 
-          element={
-            <MyListsBoard 
-              userLists={userLists} />
-          } 
-        />
-
-        <Route 
-          path="/placelist/:placelistId" 
-          element={
-            <PlacesListView 
-              userData={userData}
-              listData={listData}
-              userLists={userLists} />
-          } 
-        />
-
-        <Route 
           path="/" 
           element={
             <Home userLists={userLists} />
             } 
           />
         
+        <Route 
+          path="/mylists" 
+          element={
+            <MyListsBoard 
+              userLists={userLists}
+              user={user} />
+          } 
+        />
+
+        <Route 
+          path="/placelist/:placelistId" 
+          element={
+            <PlacesListView
+              user={user}
+              listData={listData}
+              userLists={userLists} />
+          } 
+        />
+
         <Route
           path='/place/:placeId'
           element={<Place />} />

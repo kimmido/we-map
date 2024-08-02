@@ -6,16 +6,22 @@ import { TbExternalLink } from "react-icons/tb";
 import PlaceList from './PlaceList';
 
 const PlacesListPopup = (props) => {
-    const { selectedListData, userData } = props;
+    const { selectedListData, user } = props;
 
     return (
         <div className='PlacesListPopup'>
-            <IoHeartCircle className='listIcon' style={{color: selectedListData.icon}} />
+            <IoHeartCircle className='listIcon' style={{color: selectedListData.icon_color}} />
             <div>
                 <button><TbExternalLink /></button>
                 <h2>{selectedListData.title}</h2>
-                <span><TiLocation />{selectedListData.count}</span>
-                <span>{userData.name}의 목록</span>
+                <span>
+                    <TiLocation />
+                    {
+                        selectedListData.places?
+                        selectedListData.places.length : 0
+                    }
+                </span>
+                <span>{selectedListData.users.name}의 목록</span>
             </div>
             <PlaceList places={selectedListData.places} />
         </div>
