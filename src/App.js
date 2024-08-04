@@ -10,128 +10,49 @@ import './assets/style/App.css';
 import PlacesListView from './pages/List/PlacesListView';
 import { supabase } from "./utils/supabaseClient";
 
-function App() {
-  const [user, setUser] = useState([]);
-  
-  useEffect(() => {
-    getUserInfo();
-  }, []);
-
-  useEffect(() => {
-    console.log(user.id);
-  }, [user]);
-  
-  async function getUserInfo() {
+async function getUserInfo(name) {
+  try {
     let { data: user, error } = await supabase
     .from('users')
     .select('*')
-    .eq('name', '동글이');
-
-    setUser(user[0]);
+    .eq('name', name);
+    
+    return user[0];
+    
+  } catch(error) {
+    console.log(error);
   }
+}
 
+async function getUserList() {
+  try {
+    const USER_ID = "05007f84-c3ca-4a60-8080-94b4ab9952e4";
+    let { data, error } = await supabase
+    .from('lists')
+    .select('*')
+    .or(`master.eq.${USER_ID}, members.cs.{${USER_ID}}`)
+
+    return data;
+
+  } catch(error) {
+    console.log(error);
+  }
+}
+
+const App = () => {
+  const [user, setUser] = useState([]);
+  const [userLists, setUserLists] = useState([]);
   
-  // async function recodeHandler() {
-  //   const { data, error } = await supabase
-  //   .from('page')
-  //   .insert([
-  //     { title: prompt('title?'), body: prompt('body?') },
-  //   ]);
-  // }
-
-  const USER_DATA = {
-    id: 'USER_1',
-    name: '동글이',
-    lists_id: [ '001', '002' ]
-  };
-
-  const LIST_DATA = [
-    {
-      id: '001',
-      master: 'USER_1',
-      member: 'USER_2, USER_3',
-      title: '역삼동',
-      count: 2,
-      icon: 'blue',
-      places: [
-        {
-            id: "10811159",
-            lat: "37.5016573944824",
-            lng: "127.026391177132",
-            name: "CGV 강남",
-            address: "서울 강남구 역삼동 814-6",
-            phone: "1544-1122",
-            review: [
-              {
-                master: 'USER_2',
-                image: '',
-                text: '카라멜 팝콘 맛있었음'
-              },
-              {
-                master: 'USER_1',
-                image: '',
-                text: '난 콜라'
-              }
-            ]
-        },
-        {
-            id: "218343539",
-            lat: "37.5034906075971",
-            lng: "127.027843960692",
-            name: "스머프매직포레스트",
-            address: "서울 강남구 역삼동 616-14",
-            phone: "02-564-1114",
-            review: []
-        }
-      ]
-    },
-    {
-      id: '002',
-      master: 'USER_1',
-      member: 'USER_2',
-      title: '제주도 여행',
-      count: 1,
-      icon: 'red',
-      places: [
-        {
-            id: "1343234260",
-            lat: "33.2342237172834",
-            lng: "126.484132005678",
-            name: "강정중국집",
-            address: "제주특별자치도 서귀포시 강정동 2881-19",
-            phone: "1544-1122",
-            review: []
-        }
-      ]
-    },
-    {
-      id: '003',
-      master: 'USER_2',
-      member: 'USER_3',
-      title: '제주도 여행',
-      count: 1,
-      icon: 'yellow',
-      places: [
-        {
-            id: "1343234260",
-            lat: "33.2342237172834",
-            lng: "126.484132005678",
-            name: "강정중국집",
-            address: "제주특별자치도 서귀포시 강정동 2881-19",
-            phone: "1544-1122",
-            review: []
-        }
-      ]
-    }
-  ];
-
   useEffect(() => {
+    getUserInfo('동글이')
+      .then((user) => {
+        setUser(user);
+        return getUserList(user.id);
+      })
+      .then(list => setUserLists(list))
+      .catch(() => console.log('사용자 조회 실패'))
+  }, []);
 
-  })
-
-  const [listData] = useState(LIST_DATA);
-  const [userData] = useState(USER_DATA);
-  const userLists = LIST_DATA.filter(list => userData.lists_id.includes(list.id));
 
   return (
     <div className="App">
@@ -141,8 +62,8 @@ function App() {
           path="/" 
           element={
             <Home userLists={userLists} />
-            } 
-          />
+          } 
+        />
         
         <Route 
           path="/mylists" 
@@ -158,7 +79,6 @@ function App() {
           element={
             <PlacesListView
               user={user}
-              listData={listData}
               userLists={userLists} />
           } 
         />
