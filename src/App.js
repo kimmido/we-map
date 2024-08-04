@@ -24,15 +24,14 @@ async function getUserInfo(name) {
   }
 }
 
-async function getUserList() {
+async function getUserList(USER_ID) {
   try {
-    const USER_ID = "05007f84-c3ca-4a60-8080-94b4ab9952e4";
-    let { data, error } = await supabase
+    let { data: lists, error } = await supabase
     .from('lists')
     .select('*')
     .or(`master.eq.${USER_ID}, members.cs.{${USER_ID}}`)
 
-    return data;
+    return lists;
 
   } catch(error) {
     console.log(error);
@@ -40,7 +39,7 @@ async function getUserList() {
 }
 
 const App = () => {
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState(null);
   const [userLists, setUserLists] = useState([]);
   
   useEffect(() => {
@@ -52,6 +51,10 @@ const App = () => {
       .then(list => setUserLists(list))
       .catch(() => console.log('사용자 조회 실패'))
   }, []);
+
+  useEffect(()=> {
+    console.log(userLists);
+  }, [userLists]);
 
 
   return (

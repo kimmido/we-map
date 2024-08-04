@@ -5,19 +5,34 @@ import PlacesListPopup from './PlacesListPopup';
 import BackButton from '../../components/BackButton';
 
 const PlacesListView = (props) => {
-    const { userData, userLists } = props;
+    const { user, userLists } = props;
     const { placelistId } = useParams();
-    let selectedListData = userLists.find(list => placelistId == list.id);
-    console.log(selectedListData);
+    let selectedList = userLists.find(list => placelistId == list.list_id);
+
+    useEffect(() => {
+        async function getPlaceInfo() {
+            try {
+              let { data: places, error } = await supabase
+              .from('lists')
+              .select('places(*), reviews(*)')
+              .eq('list_id', selectedList.list_id);
+              
+              return places;
+              
+            } catch(error) {
+              console.log(error);
+            }
+        }        
+    })
 
 
     return (
         <div className='PlacesListView'>
             <BackButton />
-            <Map selectedListData={selectedListData} />
+            <Map selectedList={selectedList} />
             <PlacesListPopup 
-                selectedListData={selectedListData}
-                userData={userData} />
+                selectedList={selectedList}
+                user={user} />
         </div>
     );
 }
