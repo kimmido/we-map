@@ -10,16 +10,6 @@
     
 }
 
-.SearchForm {
-    width: 100%;
-    height: 100%;
-}
-
-.searchInput {
-    width: 100%;
-    height: 100%;
-}
-
 .searchList {
     margin-top: calc(var(--size-btn-small) + var(--spacer-5));
 }
@@ -44,4 +34,18 @@
 
 .searchList > li > address {
     color: var(--gray-70);
+}
+
+.userPositionBtn {
+  position: absolute;
+  right: var(--spacer-5); bottom: var(--spacer-5);
+  width: 58px; height: 58px;
+  border-radius: 50%;
+  background-color: #222;
+
+  z-index: 10;
+  
+  /* 아이콘 속성 */
+  color: var(--gray-0);
+  font-size: 36px;
 }

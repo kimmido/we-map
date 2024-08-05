@@ -12,6 +12,16 @@ const MyListsItem = (props) => {
             <Link to={`/placelist/${ id }`}>
                 <IoHeartCircle className='listIcon' style={{color: icon}} />
                 <div className='listInfo'>
+                    {/* {
+                        edit?
+                        <input 
+                            className='edit' 
+                            type="text" 
+                            value={ value } 
+                            onChange={ onChange } 
+                            onKeyDown={ onKeyDown } 
+                            autoFocus /> :
+                    } */}
                     <strong className='listName'>{ title }</strong>
                     <span className='listCount'><TiLocation />{ count }</span>
                 </div>

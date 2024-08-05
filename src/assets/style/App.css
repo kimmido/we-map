@@ -16,21 +16,6 @@
   flex-direction: column;
 }
 
-
-.userPositionBtn {
-  position: absolute;
-  right: var(--spacer-5); bottom: var(--spacer-5);
-  width: 58px; height: 58px;
-  border-radius: 50%;
-  background-color: #222;
-
-  z-index: 10;
-  
-  /* 아이콘 속성 */
-  color: var(--gray-0);
-  font-size: 36px;
-}
-
 .Gnb {
   display: flex;
   width: 100%;
@@ -54,19 +39,6 @@
   text-decoration: none;
 }
 
-.SearchBar {
-  position: absolute;
-  left: var(--spacer-5); top: var(--spacer-5);
-  display: flex;
-  width: calc(100% - var(--spacer-5) * 2);
-  height: var(--size-btn-small);
-  background-color: var(--gray-0);
-  /* border: 1px solid var(--gray-30); */
-  border-radius: 100px;
-  box-shadow: var(--shadow-btn-top);
-
-  z-index: 10;
-}
 
 /* .mlTpnb {
   border-top: 1px solid #dadce0;

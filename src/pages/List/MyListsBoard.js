@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import '../../assets/style/pages/MyListsBoard.css'
+import '../../assets/style/pages/List.css'
 import MyLists from './MyLists';
 import Gnb from '../../components/Gnb';
-import { supabase } from '../../utils/supabaseClient';
 
 const MyListsBoard = (props) => {
     const { user, userLists } = props;

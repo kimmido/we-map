@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
 import SearchItem from './SearchItem';
-import '../../assets/style/pages/SearchPage.css'
+import '../../assets/style/pages/Home.css'
 import Gnb from '../../components/Gnb';
 import SearchBar from '../../components/SearchBar';
 
