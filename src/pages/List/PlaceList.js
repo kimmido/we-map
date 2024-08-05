@@ -23,7 +23,13 @@ const PlaceList = (props) => {
                             }}>
                             <strong>{ place.name }</strong>
                             <address>{ place.address }</address>
-                            <span>친구의 리뷰{ place.reviews.length }</span>
+                            <span>
+                                친구의 리뷰
+                                { 
+                                    place.reviews?
+                                    place.reviews.length : 0 
+                                }
+                            </span>
                         </Link>
                         <button className='listEditBtn'><FiMoreVertical /></button>
                     </div>
