@@ -13,6 +13,7 @@ const Place = () => {
     
     useEffect(()=> {
         goToPlacePosition(searchPlaceInfo);
+        console.log(searchPlaceInfo);
     }, [])
 
     const goToPlacePosition = useCallback((place)=> {

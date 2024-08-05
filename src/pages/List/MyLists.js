@@ -10,10 +10,13 @@ const MyLists = (props) => {
                 userLists.map((list) => (
                     <MyListsItem
                         key={list.id}
-                        id={list.id}
-                        icon={list.icon}
+                        id={list.list_id}
+                        icon={list.icon_color}
                         title={list.title}
-                        count={list.count} />
+                        count={
+                            list.places?
+                            list.places.length : 0
+                        } />
                     // <Link className='MyListsItem'>
                     //     <IoHeartCircle className='listIcon' style={{color: list.icon}} />
                     //     <div className='listInfo'>
