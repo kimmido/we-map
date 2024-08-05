@@ -6,7 +6,7 @@ import { FiMoreVertical } from "react-icons/fi";
 
 const MyListsItem = (props) => {
     const { id, icon, title, count } = props;
-
+    
     return (
         <div className='MyListsItem'>
             <Link to={`/placelist/${ id }`}>

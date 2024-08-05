@@ -1,23 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Map from '../../components/Map';
 import { useParams } from 'react-router-dom';
 import PlacesListPopup from './PlacesListPopup';
 import BackButton from '../../components/BackButton';
 
+
+
 const PlacesListView = (props) => {
-    const { userData, userLists, listData } = props;
+    const { user, userLists } = props;
     const { placelistId } = useParams();
-    let selectedListData = userLists.find(list => placelistId == list.id);
-    console.log(selectedListData);
+    const [selectedList, setSelectedList] = useState();
+    
+    useEffect(() => {
+        let select = userLists.find(list => placelistId == list.list_id);
+        console.log(select);
+        setSelectedList(select);
+    }, [userLists])
 
 
     return (
         <div className='PlacesListView'>
             <BackButton />
-            <Map userLists={selectedListData} />
+            <Map selectedList={selectedList} />
             <PlacesListPopup 
-                selectedListData={selectedListData}
-                userData={userData} />
+                selectedList={selectedList}
+                user={user} />
         </div>
     );
 }
