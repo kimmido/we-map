@@ -42,8 +42,8 @@ const App = () => {
         setUser(user);
         return getUserList(user.id);
       })
-      .then((list) => { 
-        setUserLists(list);
+      .then((lists) => { 
+        setUserLists(lists);
       })
       .catch((err) => console.log(err))
   }, []);
