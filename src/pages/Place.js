@@ -9,11 +9,11 @@ const { kakao } = window;
 
 const Place = () => {
     const [ placePosition, setPlacePosition ] = useState(null);
-    const [ searchPlaceInfo ] = useState(useLocation().state);
+    const [ placeInfo ] = useState(useLocation().state);
     
     useEffect(()=> {
-        goToPlacePosition(searchPlaceInfo);
-        console.log(searchPlaceInfo);
+        goToPlacePosition(placeInfo);
+        console.log();
     }, [])
 
     const goToPlacePosition = useCallback((place)=> {
@@ -24,10 +24,10 @@ const Place = () => {
     return (
         <div className='Place'>
             <SearchBar
-                displayText={searchPlaceInfo.name} />
+                displayText={placeInfo.name} />
             <Map goalPosition={placePosition} />
             <PlacePopup
-                placeInfo={searchPlaceInfo} />
+                placeInfo={placeInfo} />
         </ div>
     );
 }

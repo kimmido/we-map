@@ -8,6 +8,16 @@ const PlacePopUp = (props) => {
             <strong>{ placeInfo.name }</strong>
             <p>{ placeInfo.address }</p>
             <p>{ placeInfo.phone }</p>
+            <div>
+                {
+                    placeInfo.reviews &&
+                    placeInfo.reviews.map((review) => {
+                        <div>
+                            <p>{review.text}</p>
+                        </div>
+                    })
+                }
+            </div>
         </div>
     );
 }
