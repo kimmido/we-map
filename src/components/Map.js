@@ -4,7 +4,7 @@ import '../assets/style/components/Map.css';
 const { kakao } = window;
 
 const Map = (props) => {
-  const { goalPosition , selectedListData } = props;
+  const { goalPosition , selectedList } = props;
   const [, setMarkers] = useState([]);
   const mapContainer = useRef(null);
   
@@ -13,8 +13,8 @@ const Map = (props) => {
   }, [goalPosition]);
   
   useEffect(() => {
-    selectedListData && displayListMarkers();
-  }, [selectedListData])
+    selectedList && displayListMarkers(selectedList);
+  }, [selectedList])
   
   
   const createMap = useCallback(() => {
@@ -38,10 +38,10 @@ const Map = (props) => {
   }, [])
 
   
-  const displayListMarkers = useCallback(() => {
+  const displayListMarkers = useCallback((selectedList) => {
     const map = createMap();
     // 좌표 저장
-    const positions = selectedListData.places.map(place => new kakao.maps.LatLng(place.lat, place.lng));
+    const positions = selectedList.places.map(place => new kakao.maps.LatLng(place.lat, place.lng));
 
     // marker들을 저장하여 리렌더링
     setMarkers(markers => {

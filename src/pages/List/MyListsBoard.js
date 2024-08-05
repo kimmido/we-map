@@ -4,8 +4,9 @@ import MyLists from './MyLists';
 import Gnb from '../../components/Gnb';
 import { supabase } from '../../utils/supabaseClient';
 
-function MyListsBoard(props) {
-    const { userLists } = props;
+const MyListsBoard = (props) => {
+    const { user, userLists } = props;
+    console.log(userLists);
 
     return (
         <div className='MyListsBoard'>

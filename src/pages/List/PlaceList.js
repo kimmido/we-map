@@ -2,13 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const PlaceList = (props) => {
-    const { places } = props;
+    const { places = [] } = props;
 
     return (
         <div className='PlaceList'>
             {
                 places.map(place => (
-                    <div className='PlaceListItem' key={place.name}>
+                    <div className='PlaceListItem' key={place.id}>
                         <Link 
                             to={`/place/${place.id}`}
                             state={{
@@ -21,7 +21,7 @@ const PlaceList = (props) => {
                             }}>
                             <strong>{ place.name }</strong>
                             <address>{ place.address }</address>
-                            <span>친구의 리뷰{ place.review.length }</span>
+                            {/* <span>친구의 리뷰{ place.review.length }</span> */}
                         </Link>
                     </div>
                 ))

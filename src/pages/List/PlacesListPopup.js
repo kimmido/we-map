@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
 import { IoHeartCircle } from "react-icons/io5";
 import { TiLocation } from "react-icons/ti";
-import { FiMoreVertical } from "react-icons/fi";
 import { TbExternalLink } from "react-icons/tb";
 import PlaceList from './PlaceList';
 
 
 
 const PlacesListPopup = (props) => {
-    const { selectedList, user } = props;    
+    const { selectedList = {}, user } = props; 
 
     return (
         <div className='PlacesListPopup'>
@@ -18,7 +17,9 @@ const PlacesListPopup = (props) => {
                 <h2>{selectedList.title}</h2>
                 <span>
                     <TiLocation />
-                    { selectedList.places.length && 0 }
+                    {   selectedList.places? 
+                        selectedList.places.length : 0 
+                    }
                 </span>
                 <span>{user.name}의 목록</span>
             </div>
