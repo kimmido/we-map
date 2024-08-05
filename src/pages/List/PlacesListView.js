@@ -12,8 +12,17 @@ const PlacesListView = (props) => {
     const [selectedList, setSelectedList] = useState();
     
     useEffect(() => {
+        if(userLists.length == 0) return;
+
         let select = userLists.find(list => placelistId == list.list_id);
-        console.log(select);
+
+        select.places.map(place => {
+            place.reviews = select.reviews.filter(review => (
+                review.place_id == place.id
+            ))
+        })
+        delete select.reviews;
+
         setSelectedList(select);
     }, [userLists])
 

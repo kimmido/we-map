@@ -23,7 +23,9 @@ const PlacesListPopup = (props) => {
                 </span>
                 <span>{user.name}의 목록</span>
             </div>
-            <PlaceList places={selectedList.places} />
+            <PlaceList 
+                selectedList={selectedList}
+                places={selectedList.places} />
         </div>
     );
 }
