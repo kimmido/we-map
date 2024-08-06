@@ -4,7 +4,7 @@ import MyLists from './MyLists';
 import Gnb from '../../components/Gnb';
 
 const MyListsBoard = (props) => {
-    const { user, userLists, setUserLists } = props;
+    const { userLists, setUserLists, updateList } = props;
     console.log(userLists);
 
     return (
@@ -15,7 +15,8 @@ const MyListsBoard = (props) => {
                     <button className='listInsertBtn'>새 목록</button>
                     <MyLists 
                         userLists={userLists}
-                        setUserLists={setUserLists} />
+                        setUserLists={setUserLists}
+                        updateList={updateList} />
                 </div>
             </div>
             <Gnb />

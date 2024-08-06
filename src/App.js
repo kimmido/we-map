@@ -29,11 +29,23 @@ async function getUserList(userId) {
   .from('lists')
   .select('*, places(*), reviews(*)')
   .or(`master.eq.${userId}, members.cs.{${userId}}`)
+  .order('created_at', { ascending: true })
 
   if(error) {
     console.log(error);
   } else {
     return lists;
+  }
+}
+
+async function updateList(id, titleTxt, color) {
+  let { error } = await supabase
+  .from('lists')
+  .update({ title: titleTxt, icon_color: color })
+  .eq('list_id', id)
+  
+  if(error) {
+    console.log(error);
   }
 }
 
@@ -76,9 +88,9 @@ const App = () => {
           path="/mylists" 
           element={
             <MyListsBoard 
-              user={user}
               userLists={userLists}
-              setUserLists={setUserLists} />
+              setUserLists={setUserLists}
+              updateList={updateList} />
           } 
         />
 

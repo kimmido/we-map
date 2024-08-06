@@ -7,15 +7,11 @@ import ListControlButtons from '../../components/ListControlButtons';
 import Popup from './Popup';
 
 const MyListsItem = (props) => {
-    const { id, icon, title, count, onDeleteItem  } = props;
+    const { id, icon, title, count, onDeleteItem, updateList  } = props;
     const [showButtons, setShowButtons] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [newTitle, setNewTitle] = useState(title);
     const [newIcon, setNewIcon] = useState(icon);
-
-    const onSubmit = useCallback((e) => {
-        e.preventDefault();
-    }, []);
 
     const handleEdit = useCallback(() => {
         setIsEditing(true);
@@ -31,6 +27,7 @@ const MyListsItem = (props) => {
         setNewTitle(newTitle);
         setNewIcon(newIcon);
         setIsEditing(false);
+        updateList(id, newTitle, newIcon)
         // 저장 로직을 여기에 추가하세요
     };
 
