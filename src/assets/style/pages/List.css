@@ -42,7 +42,7 @@ h2 {
     width: 40px;
 }
 
-/* PlacesList */
+/* === PlacesList === */
 .PlacesListPopup {
     position: absolute;
     bottom: 0; left: 0;
@@ -57,4 +57,29 @@ h2 {
 
 .PlaceListItem {
     border-bottom: 1px solid var(--gray-10);
+}
+
+.backBtnBox {
+    position: absolute;
+    left: var(--spacer-5); top: var(--spacer-5);
+    width: calc(100% - var(--spacer-5) * 2);
+    height: var(--size-btn-medium);
+    background-color: var(--gray-0);
+    border-radius: var(--radius-square);
+    box-shadow: var(--shadow-btn-top);
+  
+    z-index: 10;
+}
+
+.backBtnIcon {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: var(--size-btn-medium);
+}
+
+.backBtnTxt {
+    height: 100%;
+    margin-left: calc(var(--size-btn-medium));
+    line-height: var(--size-btn-medium);
 }

@@ -12,7 +12,9 @@ const BackButton = () => {
 
     return (
         <div className='BackButton' onClick={navigateBack}>
-            <HiArrowSmallLeft />
+            <div className='BackButtonIcon'>
+                <HiArrowSmallLeft />
+            </div>
         </div>
     );
 }
