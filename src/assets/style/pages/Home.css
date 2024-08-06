@@ -11,7 +11,7 @@
 }
 
 .searchList {
-    margin-top: calc(var(--size-btn-small) + var(--spacer-5));
+    margin-top: calc(var(--size-btn-medium) + var(--spacer-5));
 }
 
 .searchList > li {

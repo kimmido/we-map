@@ -8,13 +8,22 @@
     width: 100%;
     height: 100%;
   }
+
+  /* === BackButton === */
+  .BackButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
   
 .SearchBar {
   position: absolute;
   left: var(--spacer-5); top: var(--spacer-5);
   display: flex;
   width: calc(100% - var(--spacer-5) * 2);
-  height: var(--size-btn-small);
+  height: var(--size-btn-medium);
   background-color: var(--gray-0);
   /* border: 1px solid var(--gray-30); */
   border-radius: 100px;
@@ -23,12 +32,30 @@
   z-index: 10;
 }
 
+.searchBarIcon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--size-btn-medium);
+  height: var(--size-btn-medium);
+  font-size: var(--size-icon);
+  color: var(--gray-70);
+}
+
+.searchBarCon {
+  overflow: hidden;
+  width: 300px;
+  height: 100%;
+  line-height: var(--size-btn-medium);;
+}
+
 .SearchForm {
   width: 100%;
   height: 100%;
 }
 
 .searchInput {
+  margin-top: -4px;
   width: 100%;
   height: 100%;
 }
