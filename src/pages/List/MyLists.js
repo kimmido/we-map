@@ -2,7 +2,11 @@ import React from 'react';
 import MyListsItem from './MyListsItem';
 
 const MyLists = (props) => {
-    const { userLists } = props;
+    const { userLists, setUserLists } = props;
+
+    const handleDeleteItem = (id) => {
+        setUserLists(userLists.filter(item => item.id !== id));
+    };
 
     return (
         <div className='MyLists'>
@@ -16,16 +20,9 @@ const MyLists = (props) => {
                         count={
                             list.places?
                             list.places.length : 0
-                        } />
-                    // <Link className='MyListsItem'>
-                    //     <IoHeartCircle className='listIcon' style={{color: list.icon}} />
-                    //     <div className='listInfo'>
-                    //         <strong className='listName'>{ list.name }</strong>
-                    //         <span className='listCount'><TiLocation />{ list.count }</span>
-                    //     </div>
-                    //     <button className='listEditBtn'><FiMoreVertical /></button>
-                    // </Link>
-                    
+                        } 
+                        onDeleteItem={handleDeleteItem}
+                    />
                 ))
             }
         </div>

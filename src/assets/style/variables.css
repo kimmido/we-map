@@ -1,53 +1,77 @@
 :root {
-    --spacer-1: 2px;
-    --spacer-2: 4px;
-    --spacer-3: 8px;
-    --spacer-4: 12px;
-    --spacer-5: 16px;
-    --spacer-6: 20px;
-    --spacer-7: 24px;
-    --spacer-8: 32px;
-    --spacer-9: 40px;
-    --spacer-10: 48px;
-    
-    --z-index-base: 10;
-    --z-index-con: 20;
-    --z-index-gnb: 30;
-    --z-index-popup-background: 60;
-    --z-index-popup: 70;
-    --z-index-top: 100;
-    
-    /* 크기 */
-    --size-btn-small: 30px;
-    --size-btn-medium: 44px;
-    --size-btn-large: 50px;
-    --size-btn-xlarge: 57px;
-    
-    --size-icon: 24px;
+  /* 간격 */
+  --spacer-1: 2px;
+  --spacer-2: 4px;
+  --spacer-3: 8px;
+  --spacer-4: 12px;
+  --spacer-5: 16px;
+  --spacer-6: 20px;
+  --spacer-7: 24px;
+  --spacer-8: 32px;
+  --spacer-9: 40px;
+  --spacer-10: 48px;
+  
+  /* 배치 */
+  --z-index-base: 10;
+  --z-index-con: 20;
+  --z-index-gnb: 30;
+  --z-index-popup-background: 60;
+  --z-index-popup: 70;
+  --z-index-fixed: 100;
+  
+  /* 크기 */
+  --size-btn-small: 30px;
+  --size-btn-medium: 44px;
+  --size-btn-large: 50px;
+  --size-btn-xlarge: 57px;
+  
+  --size-icon: 24px;
 
-    --gnb-H: 64px;
+  --gnb-H: 64px;
 
-    --top-btn: 48px;
+  --top-btn: 48px;
 
-    /* 색상 */
-    --gray-0: #ffffff; /* background */
-    --gray-5: #f8f8f8; /* background */
-    --gray-10: #f0f0f0; /* background */
-    --gray-20: #e4e4e4; /* disabled */
-    --gray-30: #d8d8d8; /* border */
-    --gray-40: #c6c6c6; /* border */
-    --gray-50: #8e8e8e; /* border & text-disabled & with white*/
-    --gray-60: #717171;
-    --gray-70: #555555; /* text-body */
-    --gray-80: #2d2d2d;
-    --gray-90: #1d1d1d; /* text-title */
-    --gray-100: #000000;
+  /* font */
+  --font-size-title-xsm: 15px;
+  --font-size-title-sm: 17px;
+  --font-size-title-md: 19px;
+  --font-size-title-lg: 21px;
+  --font-size-title-Xlg: 25px;
+  
+  --font-size-body-sm: 15px;
+  --font-size-body-md: 17px;
+  --font-size-body-lg: 19px;
 
-    --shadow-popup: 0 -4px 6px rgba(0, 0, 0, .08);
-    --shadow-btn-top: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
-    --shadow-btn-on-map: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  /* 색상 */
+  --gray-0: #ffffff; /* background */
+  --gray-5: #f8f8f8; /* background */
+  --gray-10: #f0f0f0; /* background */
+  --gray-20: #e4e4e4; /* disabled */
+  --gray-30: #d8d8d8; /* border */
+  --gray-40: #c6c6c6; /* border */
+  --gray-50: #8e8e8e; /* border & text-disabled & with white*/
+  --gray-60: #717171;
+  --gray-70: #555555; /* text-body */ 
+  --gray-80: #2d2d2d;
+  --gray-90: #1d1d1d; /* text-title */
+  --gray-100: #000000;
 
-    /* 모양 */
-    --radius-round : 500px;
-    --radius-square : 8px;
-  }
+  --success-5: #eef7f0; /* surface */
+  --success-10: #cee9d4; /* border */ 
+  --success-20: #b2dcbb;
+  --success-30: #8cca99;
+  --success-40: #33a14b;
+  --success-50: #008a1e; /* base */ 
+  --success-60: #006e18; /* text */ 
+  --success-70: #005312;
+  --success-80: #00370c;
+  --success-90: #002207;
+  
+  --shadow-popup: 0 -4px 6px rgba(0, 0, 0, .08);
+  --shadow-btn-top: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
+  --shadow-btn-on-map: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+
+  /* 모양 */
+  --radius-round : 500px;
+  --radius-square : 8px;
+}

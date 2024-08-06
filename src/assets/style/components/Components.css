@@ -97,3 +97,22 @@
   width: 100%;
   height: 100%;
 }
+
+
+/* === ListControlButtons === */
+.ListControlButtons {
+  position: absolute;
+  right: 0; top: calc(100% - var(--spacer-5));
+  border: 1px solid var(--gray-70);
+  background-color: var(--gray-0);
+  
+  z-index: 10;
+}
+
+.ListControlButtons > button {
+  display: block;
+  padding: var(--spacer-3) var(--spacer-5);
+}
+
+
+/* === Popup === */

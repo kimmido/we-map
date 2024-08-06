@@ -16,10 +16,12 @@ async function getUser(name) {
   .from('users')
   .select('*')
   .eq('name', name);
-  
-  if(error) console.log(error);
 
-  return user[0];
+  if(error) {
+    console.log(error);
+  } else {
+    return user;
+  }
 }
 
 async function getUserList(userId) {
@@ -28,9 +30,11 @@ async function getUserList(userId) {
   .select('*, places(*), reviews(*)')
   .or(`master.eq.${userId}, members.cs.{${userId}}`)
 
-  if(error) console.log(error);
-
-  return lists;
+  if(error) {
+    console.log(error);
+  } else {
+    return lists;
+  }
 }
 
 const App = () => {
@@ -40,8 +44,8 @@ const App = () => {
   useEffect(() => {
     getUser('동글이')
       .then((user) => {
-        setUser(user);
-        return getUserList(user.id);
+        setUser(user[0]);
+        return getUserList(user[0].id);
       })
       .then((lists) => { 
         setUserLists(lists);
@@ -49,12 +53,12 @@ const App = () => {
       .catch((err) => console.log(err))
   }, []);
   
-  useEffect(()=> {
-    console.log(user);
-  }, [user]);
-  useEffect(()=> {
-    console.log(userLists);
-  }, [userLists]);
+  // useEffect(()=> {
+  //   console.log(user);
+  // }, [user]);
+  // useEffect(()=> {
+  //   console.log(userLists);
+  // }, [userLists]);
 
 
   return (
@@ -73,7 +77,8 @@ const App = () => {
           element={
             <MyListsBoard 
               user={user}
-              userLists={userLists} />
+              userLists={userLists}
+              setUserLists={setUserLists} />
           } 
         />
 
