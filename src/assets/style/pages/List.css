@@ -59,7 +59,7 @@ h2 {
     border-bottom: 1px solid var(--gray-10);
 }
 
-.backBtnBox {
+.PlacesListTopBtnBox {
     position: absolute;
     left: var(--spacer-5); top: var(--spacer-5);
     width: calc(100% - var(--spacer-5) * 2);
@@ -71,14 +71,14 @@ h2 {
     z-index: 10;
 }
 
-.backBtnIcon {
+.PlacesListTopBtnIcon {
     position: absolute;
     top: 0; left: 0;
     width: 100%;
     height: var(--size-btn-medium);
 }
 
-.backBtnTxt {
+.PlacesListTopBtnTxt {
     height: 100%;
     margin-left: calc(var(--size-btn-medium));
     line-height: var(--size-btn-medium);

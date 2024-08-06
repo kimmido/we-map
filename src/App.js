@@ -1,13 +1,14 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import MyListsBoard from './pages/List/MyListsBoard';
 import SearchPage from './pages/Home/SearchPage';
+import PlacesListView from './pages/List/PlacesListView';
 import Place from './pages/Place';
 import './assets/style/variables.css';
 import './assets/style/reset.css';
 import './assets/style/App.css';
-import PlacesListView from './pages/List/PlacesListView';
+import './assets/style/components/Components.css'
 import { supabase } from "./utils/supabaseClient";
 
 async function getUser(name) {

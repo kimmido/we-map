@@ -3,7 +3,6 @@ import BackButton from './BackButton';
 import { useLocation } from 'react-router-dom';
 import { CiSearch } from "react-icons/ci";
 import SearchForm from './SearchForm.js';
-import '../assets/style/components/Components.css';
 
 const SearchBar = (props) => {
     const { searchInputRef, handleSubmit, displayText } = props;
