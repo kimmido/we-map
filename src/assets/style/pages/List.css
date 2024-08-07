@@ -110,7 +110,7 @@ h2 {
     font-size: var(--font-size-title-sm);
 }
 
-.colorPicker {
+.MyListsColorPicker {
     display: flex;
     justify-content: space-between;
     margin-top: var(--spacer-4)
