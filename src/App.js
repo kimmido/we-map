@@ -8,46 +8,9 @@ import Place from './pages/Place';
 import './assets/style/variables.css';
 import './assets/style/reset.css';
 import './assets/style/App.css';
-import './assets/style/components/Components.css'
-import { supabase } from "./utils/supabaseClient";
+import './assets/style/components/Components.css';
+import { getUser, getUserList } from './utils/supabaseJS';
 
-async function getUser(name) {
-  let { data: user, error } = await supabase
-  .from('users')
-  .select('*')
-  .eq('name', name);
-
-  if(error) {
-    console.log(error);
-  } else {
-    return user;
-  }
-}
-
-async function getUserList(userId) {
-  let { data: lists, error } = await supabase
-  .from('lists')
-  .select('*, places(*), reviews(*)')
-  .or(`master.eq.${userId}, members.cs.{${userId}}`)
-  .order('created_at', { ascending: true })
-
-  if(error) {
-    console.log(error);
-  } else {
-    return lists;
-  }
-}
-
-async function updateList(id, titleTxt, color) {
-  let { error } = await supabase
-  .from('lists')
-  .update({ title: titleTxt, icon_color: color })
-  .eq('list_id', id)
-  
-  if(error) {
-    console.log(error);
-  }
-}
 
 const App = () => {
   const [user, setUser] = useState({});
@@ -56,8 +19,8 @@ const App = () => {
   useEffect(() => {
     getUser('동글이')
       .then((user) => {
-        setUser(user[0]);
-        return getUserList(user[0].id);
+        setUser(user);
+        return getUserList(user.id);
       })
       .then((lists) => { 
         setUserLists(lists);
@@ -89,8 +52,7 @@ const App = () => {
           element={
             <MyListsBoard 
               userLists={userLists}
-              setUserLists={setUserLists}
-              updateList={updateList} />
+              setUserLists={setUserLists} />
           } 
         />
 

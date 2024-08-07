@@ -32,6 +32,7 @@ button,
 }
 
 html, body{
+    font-family: 'Pretendard Variable';
     -webkit-text-size-adjust : none; 
     -ms-text-size-adjust : none; 
     -moz-text-size-adjust : none; 
@@ -39,7 +40,7 @@ html, body{
 }
 
 html{
-    font-size: 16px;
+    font-size: var(--font-size-title-sm);
     color: var(--gray-90);
 }
 
@@ -62,8 +63,10 @@ textarea {
 button {
     font-size: 100%;
     vertical-align: middle;
-    border: 0 none;
+    color: var(--gray-90);
     background-color: transparent;
+    border: 0 none;
+    border-radius: var(--radius-square);
     cursor: pointer;
 }
 

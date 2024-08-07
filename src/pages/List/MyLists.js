@@ -2,10 +2,10 @@ import React from 'react';
 import MyListsItem from './MyListsItem';
 
 const MyLists = (props) => {
-    const { userLists, setUserLists, updateList } = props;
+    const { userLists, setUserLists } = props;
 
     const handleDeleteItem = (id) => {
-        setUserLists(userLists.filter(item => item.id !== id));
+        setUserLists(userLists.filter(list => list.list_id !== id));
     };
 
     return (
@@ -22,7 +22,6 @@ const MyLists = (props) => {
                             list.places.length : 0
                         } 
                         onDeleteItem={handleDeleteItem}
-                        updateList={updateList}
                     />
                 ))
             }
