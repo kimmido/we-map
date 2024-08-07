@@ -32,21 +32,27 @@ const App = () => {
   }, []);
 
 
-  const d = supabase
-  .channel('changes')
-  .on(
-    'postgres_changes',
-    {
-      event: '*',
-      schema: 'public',
-      table: 'lists',
-      // filter: 'list_id=in(listsId)',
-    },
-    (payload) => console.log(payload)
-  )
-  .subscribe()
   useEffect(() => {
-    d()
+    const subscription = supabase
+    .channel('public:lists')
+    .on(
+      'postgres_changes',
+      {
+        event: '*',
+        schema: 'public',
+        table: 'lists',
+        // filter: 'list_id=in(listsId)',
+      },
+      (payload) => {
+        console.log(payload);
+        console.log('yo');
+      }
+    )
+    .subscribe()
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, [])
   
   // useEffect(()=> {
