@@ -8,7 +8,7 @@ import { getPlaceReviews, getUser } from '../utils/supabaseJS';
 
 const { kakao } = window;
 
-const Place = ({ user, listsId, userLists, reviews }) => {
+const Place = ({ user, listsId, userLists }) => {
     const [ placePosition, setPlacePosition ] = useState(null);
     const [ placeInfo ] = useState(useLocation().state);
     // const [ placeReviews, setPlaceReviews] = useState([]);
@@ -17,17 +17,19 @@ const Place = ({ user, listsId, userLists, reviews }) => {
     useEffect(()=> {
         goToPlacePosition(placeInfo);
         
-        // const placeReviews = reviews.filter(review => review.place_id == placeInfo.id);
-        // const myReviews = placeReviews.filter(review => review.user_id == user.id);
-        // const membersReviews = placeReviews.filter(review => review.user_id != user.id);
-        // setPlaceReviews(placeReviews);
         
-        getPlaceReviews(placeInfo.id, listsId.current)
+        getPlaceReviews(placeInfo.id, listsId)
             .then(data => {
                 console.log(data)
                 setReviewsInfo(data);
-            });
-    }, [placeInfo])
+            }).catch((error) => {
+                console.log(error);
+            })
+
+        return () => {
+        };
+    }, [placeInfo, listsId])
+    
 
     const goToPlacePosition = useCallback((place)=> {
         const pos = new kakao.maps.LatLng(place.lat, place.lng);

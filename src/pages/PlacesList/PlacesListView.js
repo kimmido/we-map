@@ -16,14 +16,14 @@ const PlacesListView = (props) => {
 
         let select = userLists.find(list => placelistId == list.list_id);
 
-        if(select.reviews) {
-            select.places.map(place => {
-                place.reviews = select.reviews.filter(review => (
-                    review.place_id == place.id
-                ))
-            })
-            delete select.reviews;
-        }
+        // if(select.reviews) {
+        //     select.places.map(place => {
+        //         place.reviews = select.reviews.filter(review => (
+        //             review.place_id == place.id
+        //         ))
+        //     })
+        //     delete select.reviews;
+        // }
 
         setSelectedList(select);
     }, [userLists])

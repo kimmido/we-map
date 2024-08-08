@@ -20,7 +20,7 @@ export async function getUserList(userId) {
   try {
     let { data: lists, error } = await supabase
       .from('lists')
-      .select('*, places(*), reviews(*)')
+      .select('*, reviews(*)')
       .or(`master.eq.${userId}, members.cs.{${userId}}`)
       .order('created_at', { ascending: true });
 
@@ -32,34 +32,33 @@ export async function getUserList(userId) {
   }
 }
 
-export async function getReviews(userId) {
+export async function getPlaces( placeIdArr) {
   try {
-    let { data: lists, error } = await supabase
-      .from('lists')
-      .select('reviews(*)')
-      .or(`master.eq.${userId}, members.cs.{${userId}}`)
-      .order('created_at', { ascending: true });
+    let { data, error } = await supabase
+      .from('places')
+      .select('*')
+      .in('place_id', placeIdArr)
 
     if (error) throw error;
-    return lists;
+    return data;
   } catch (error) {
-    console.error('Error fetching user lists:', error);
+    console.error('Error fetching place review:', error);
     throw error;
   }
 }
 
-export async function getPlaceReviews(placeId, listsId) {
+export async function getPlaceReviews(placeId, listIdArr) {
   try {
     let { data, error } = await supabase
       .from('reviews')
       .select('*, lists(title, icon_color), users(name)')
       .eq('place_id', placeId)
-      .in('list_id', listsId)
+      .in('list_id', listIdArr)
 
     if (error) throw error;
     return data;
   } catch (error) {
-    console.error('Error fetching user lists:', error);
+    console.error('Error fetching place review:', error);
     throw error;
   }
 }
