@@ -9,7 +9,7 @@ import './assets/style/variables.css';
 import './assets/style/reset.css';
 import './assets/style/App.css';
 import './assets/style/components/Components.css';
-import { getUser, getUserList } from './utils/supabaseJS';
+import { getUser, getUserList, getReviews } from './utils/supabaseJS';
 import { supabase } from './utils/supabaseClient';
 import { RealtimeLists } from './utils/supabaseRealtime';
 
@@ -17,8 +17,9 @@ import { RealtimeLists } from './utils/supabaseRealtime';
 const App = () => {
   const [user, setUser] = useState({});
   const [userLists, setUserLists] = useState([]);
-  const listsId = useRef([]);
+  const [reviews, setReviews] = useState([]);
   const [userId] = useState('05007f84-c3ca-4a60-8080-94b4ab9952e4');
+  const listsId = useRef([]);
   
 
   useEffect(() => {
@@ -26,15 +27,23 @@ const App = () => {
 
     const fetchData = async () => {
       try {
-        const [user, lists] = await Promise.all([getUser(userId), getUserList(userId)]);
+        const [user, lists ,reviewArr] = await Promise.all([getUser(userId), getUserList(userId), getReviews(userId)]);
         
         if (!isMounted) return;
 
+        
+        let reviews = [];
+        reviewArr.map(idx => 
+          reviews = [...reviews, ...idx.reviews]
+        )
+        lists.map(list => 
+          listsId.current = [...listsId.current, list.list_id]
+        )
+        
+        setReviews(reviews);
         setUser(user);
         setUserLists(lists);
-        lists.map(list => 
-          listsId.current.push(list.list_id)
-        )
+
       } catch (err) {
         console.error(err);
       }
@@ -55,9 +64,9 @@ const App = () => {
   // useEffect(()=> {
   //   console.log(user);
   // }, [user]);
-  useEffect(()=> {
-    console.log(userLists);
-  }, [userLists]);
+  // useEffect(()=> {
+  //   console.log(userLists);
+  // }, [userLists]);
 
 
   return (
@@ -93,6 +102,7 @@ const App = () => {
           path='/place/:placeId'
           element={
           <Place
+            reviews={reviews}
             userLists={userLists} />
           }
         />

@@ -32,6 +32,22 @@ export async function getUserList(userId) {
   }
 }
 
+export async function getReviews(userId) {
+  try {
+    let { data: lists, error } = await supabase
+      .from('lists')
+      .select('reviews(*)')
+      .or(`master.eq.${userId}, members.cs.{${userId}}`)
+      .order('created_at', { ascending: true });
+
+    if (error) throw error;
+    return lists;
+  } catch (error) {
+    console.error('Error fetching user lists:', error);
+    throw error;
+  }
+}
+
 export async function updateList(id, titleTxt, color) {
   try {
     let { data: list, error } = await supabase

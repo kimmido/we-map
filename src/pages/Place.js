@@ -7,14 +7,35 @@ import SearchBar from '../components/SearchBar';
 
 const { kakao } = window;
 
-const Place = () => {
+const Place = ({ userLists }) => {
     const [ placePosition, setPlacePosition ] = useState(null);
     const [ placeInfo ] = useState(useLocation().state);
     
     useEffect(()=> {
         goToPlacePosition(placeInfo);
         console.log(placeInfo);
-    }, [])
+
+        let listWithReviews;
+
+        userLists.map(list => {
+            listWithReviews = list.reviews.filter(review => review.place_id == placeInfo.id);
+        })
+        
+        console.log(listWithReviews);
+        
+
+    }, [placeInfo])
+
+
+    // userlists [
+        // 0 [
+            // reviews []
+        // ],
+        // 1 [
+            // reviews [ 1, 2, 3]
+        // ]
+    // ]
+
 
     const goToPlacePosition = useCallback((place)=> {
         const pos = new kakao.maps.LatLng(place.lat, place.lng);
