@@ -17,19 +17,32 @@ const App = () => {
   const [user, setUser] = useState({});
   const [userLists, setUserLists] = useState([]);
   const listsId = useRef([]);
+  const [userId] = useState('05007f84-c3ca-4a60-8080-94b4ab9952e4');
   
+
   useEffect(() => {
-    getUser('동글이')
-      .then((user) => {
+    let isMounted = true;
+
+    const fetchData = async () => {
+      try {
+        const [user, lists] = await Promise.all([getUser(userId), getUserList(userId)]);
+        
+        if (!isMounted) return;
+
         setUser(user);
-        return getUserList(user.id);
-      })
-      .then((lists) => { 
         setUserLists(lists);
         listsId.current = lists.map(list => list.list_id);
-      })
-      .catch((err) => console.log(err))
-  }, []);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [userId]);
 
 
   useEffect(() => {
