@@ -102,6 +102,8 @@ const App = () => {
           path='/place/:placeId'
           element={
           <Place
+            user={user}
+            listsId={listsId}
             reviews={reviews}
             userLists={userLists} />
           }

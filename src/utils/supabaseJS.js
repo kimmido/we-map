@@ -48,6 +48,22 @@ export async function getReviews(userId) {
   }
 }
 
+export async function getPlaceReviews(placeId, listsId) {
+  try {
+    let { data, error } = await supabase
+      .from('reviews')
+      .select('*, lists(title, icon_color), users(name)')
+      .eq('place_id', placeId)
+      .in('list_id', listsId)
+
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error('Error fetching user lists:', error);
+    throw error;
+  }
+}
+
 export async function updateList(id, titleTxt, color) {
   try {
     let { data: list, error } = await supabase
