@@ -11,6 +11,7 @@ import './assets/style/App.css';
 import './assets/style/components/Components.css';
 import { getUser, getUserList } from './utils/supabaseJS';
 import { supabase } from './utils/supabaseClient';
+import { RealtimeLists } from './utils/supabaseRealtime';
 
 
 const App = () => {
@@ -31,7 +32,7 @@ const App = () => {
 
         setUser(user);
         setUserLists(lists);
-        listsId.current = lists.map(list => list.list_id);
+        listsId.current = lists.find(list => list.list_id);
       } catch (err) {
         console.error(err);
       }
@@ -46,34 +47,15 @@ const App = () => {
 
 
   useEffect(() => {
-    const subscription = supabase
-    .channel('public:lists')
-    .on(
-      'postgres_changes',
-      {
-        event: '*',
-        schema: 'public',
-        table: 'lists',
-        // filter: 'list_id=in(listsId)',
-      },
-      (payload) => {
-        console.log(payload);
-        console.log('yo');
-      }
-    )
-    .subscribe()
-
-    return () => {
-      subscription.unsubscribe();
-    };
+    RealtimeLists(listsId.current);
   }, [])
   
   // useEffect(()=> {
   //   console.log(user);
   // }, [user]);
-  // useEffect(()=> {
-  //   console.log(userLists);
-  // }, [userLists]);
+  useEffect(()=> {
+    console.log(userLists);
+  }, [userLists]);
 
 
   return (
