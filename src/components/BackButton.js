@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaArrowLeft } from "react-icons/fa";
+import { HiArrowSmallLeft } from "react-icons/hi2";
 
 const BackButton = () => {
     const navigate = useNavigate();
@@ -11,7 +11,9 @@ const BackButton = () => {
 
     return (
         <div className='BackButton' onClick={navigateBack}>
-            <FaArrowLeft />
+            <div className='BackButtonIcon'>
+                <HiArrowSmallLeft />
+            </div>
         </div>
     );
 }

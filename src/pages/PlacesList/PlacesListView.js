@@ -31,7 +31,12 @@ const PlacesListView = (props) => {
 
     return (
         <div className='PlacesListView'>
-            <BackButton />
+            <div className='PlacesListTopBtnBox'>
+                <div className='PlacesListTopBtnIcon'>
+                    <BackButton />
+                </div>
+                <span className='PlacesListTopBtnTxt'>목록으로 돌아가기</span>
+            </div>
             <Map selectedList={selectedList} />
             <PlacesListPopup 
                 selectedList={selectedList}

@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
-import '../assets/style/components/Components.css';
 
 const { kakao } = window;
 
