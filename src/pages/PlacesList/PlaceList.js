@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiMoreVertical } from "react-icons/fi";
 
 const PlaceList = (props) => {
     const { places = [], selectedList } = props;
-
+    
     return (
         <div className='PlaceList'>
             {
                 places.map(place => (
                     <div className='PlaceListItem' key={place.id}>
+                        {
+                            console.log(place.reviews)
+                        }
                         <Link 
                             to={`/place/${place.id}`}
                             state={{
@@ -23,13 +26,16 @@ const PlaceList = (props) => {
                             }}>
                             <strong>{ place.name }</strong>
                             <address>{ place.address }</address>
-                            <span>
-                                친구의 리뷰
-                                { 
-                                    place.reviews?
-                                    place.reviews.length : 0 
+                            <div className='reviews'>
+                                <span>친구의 리뷰 { place.reviews.length }</span>
+                                {
+                                    place.reviews.length != 0 && (
+                                        <div>
+                                            {place.reviews[0].text}
+                                        </div> 
+                                    )
                                 }
-                            </span>
+                            </div>
                         </Link>
                         <button className='listEditBtn'><FiMoreVertical /></button>
                     </div>

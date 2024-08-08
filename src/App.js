@@ -32,7 +32,9 @@ const App = () => {
 
         setUser(user);
         setUserLists(lists);
-        listsId.current = lists.find(list => list.list_id);
+        lists.map(list => 
+          listsId.current.push(list.list_id)
+        )
       } catch (err) {
         console.error(err);
       }
@@ -89,7 +91,11 @@ const App = () => {
 
         <Route
           path='/place/:placeId'
-          element={<Place />} />
+          element={
+          <Place
+            userLists={userLists} />
+          }
+        />
           
         <Route 
           path="/search" 
