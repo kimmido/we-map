@@ -1,16 +1,16 @@
 import React from 'react';
 
 const PlacePopUp = (props) => {
-    const { placeInfo, reviewsInfo } = props;
+    const { name, address, phone, reviewsInfo } = props;
     // console.log(placeReviews);
 
     return (
         <div className='PlacePopUp'>
-            <h3>{ placeInfo.name }</h3>
-            <p>{ placeInfo.address }</p>
-            <p>{ placeInfo.phone }</p>
+            <h3>{ name }</h3>
+            <p>{ address }</p>
+            <p>{ phone }</p>
             <div>
-                <h4>리뷰</h4>
+                <h4>리뷰 { reviewsInfo.length }</h4>
                 {
                     reviewsInfo.map(idx => 
                         <div key={idx.id}>

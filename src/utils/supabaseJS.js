@@ -20,7 +20,7 @@ export async function getUserList(userId) {
   try {
     let { data: lists, error } = await supabase
       .from('lists')
-      .select('*, reviews(*)')
+      .select('*')
       .or(`master.eq.${userId}, members.cs.{${userId}}`)
       .order('created_at', { ascending: true });
 
@@ -32,22 +32,37 @@ export async function getUserList(userId) {
   }
 }
 
-export async function getPlaces( placeIdArr) {
+export async function getPlaces(placeIdArr) {
   try {
     let { data, error } = await supabase
       .from('places')
-      .select('*')
+      .select('*, reviews(count)')
       .in('place_id', placeIdArr)
 
     if (error) throw error;
     return data;
   } catch (error) {
-    console.error('Error fetching place review:', error);
+    console.error('Error fetching place:', error);
     throw error;
   }
 }
 
-export async function getPlaceReviews(placeId, listIdArr) {
+// export async function getReviews(listIdArr) {
+//   try {
+//     let { data, error } = await supabase
+//       .from('reviews')
+//       .select('*')
+//       .in('list_id', listIdArr)
+
+//     if (error) throw error;
+//     return data;
+//   } catch (error) {
+//     console.error('Error fetching Reviews:', error);
+//     throw error;
+//   }
+// }
+
+export async function getCurrentPlaceReviews(placeId, listIdArr) {
   try {
     let { data, error } = await supabase
       .from('reviews')
@@ -58,7 +73,7 @@ export async function getPlaceReviews(placeId, listIdArr) {
     if (error) throw error;
     return data;
   } catch (error) {
-    console.error('Error fetching place review:', error);
+    console.error('Error fetching current place review:', error);
     throw error;
   }
 }
