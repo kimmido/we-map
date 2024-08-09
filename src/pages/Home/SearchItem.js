@@ -8,7 +8,7 @@ const SearchItem = (props) => {
     return (
         <li className='SearchItem'>
             <Link 
-                to={`/place/${name}`}
+                to={`/place/${id}`}
                 state={{
                     id: id,
                     lat: lat,

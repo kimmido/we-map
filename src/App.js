@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import MyListsBoard from './pages/MyLists/MyListsBoard';
@@ -9,15 +9,15 @@ import './assets/style/variables.css';
 import './assets/style/reset.css';
 import './assets/style/App.css';
 import './assets/style/components/Components.css';
-import { getUser, getUserList } from './utils/supabaseJS';
-import { supabase } from './utils/supabaseClient';
+import { getUser, getUserList, getPlaces } from './utils/supabaseJS';
 import { RealtimeLists } from './utils/supabaseRealtime';
 
 
 const App = () => {
   const [user, setUser] = useState({});
   const [userLists, setUserLists] = useState([]);
-  const listsId = useRef([]);
+  const [listsId, setListId] = useState([]);
+  const [places, setPlaces] = useState([]);
   const [userId] = useState('05007f84-c3ca-4a60-8080-94b4ab9952e4');
   
 
@@ -28,11 +28,16 @@ const App = () => {
       try {
         const [user, lists] = await Promise.all([getUser(userId), getUserList(userId)]);
         
+        const placeIdArr = lists.reduce((arr, list) => arr.concat(list.place_ids), []);
+        const places = await getPlaces(placeIdArr);
+        
         if (!isMounted) return;
-
+        // console.log(lists);
+        // console.log(places);
+        
         setUser(user);
         setUserLists(lists);
-        listsId.current = lists.find(list => list.list_id);
+        setPlaces(places)
       } catch (err) {
         console.error(err);
       }
@@ -47,15 +52,11 @@ const App = () => {
 
 
   useEffect(() => {
-    RealtimeLists(listsId.current);
-  }, [])
-  
-  // useEffect(()=> {
-  //   console.log(user);
-  // }, [user]);
-  useEffect(()=> {
-    console.log(userLists);
-  }, [userLists]);
+    let listIdArr = userLists.map(list => list.list_id);
+
+    setListId(listIdArr);
+    RealtimeLists(listIdArr);
+  }, [userLists])
 
 
   return (
@@ -79,9 +80,10 @@ const App = () => {
         />
 
         <Route 
-          path="/placelist/:placelistId" 
+          path="/placeList/:placeListId" 
           element={
             <PlacesListView
+              places={places}
               user={user}
               userLists={userLists} />
           } 
@@ -89,7 +91,13 @@ const App = () => {
 
         <Route
           path='/place/:placeId'
-          element={<Place />} />
+          element={
+          <Place
+            user={user}
+            listsId={listsId}
+            userLists={userLists} />
+          }
+        />
           
         <Route 
           path="/search" 

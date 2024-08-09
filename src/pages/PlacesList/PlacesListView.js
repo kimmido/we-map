@@ -7,25 +7,21 @@ import BackButton from '../../components/BackButton';
 
 
 const PlacesListView = (props) => {
-    const { user, userLists } = props;
-    const { placelistId } = useParams();
+    const { user, userLists, places } = props;
+    const { placeListId } = useParams();
     const [selectedList, setSelectedList] = useState();
     
     useEffect(() => {
         if(userLists.length == 0) return;
+        
+        let currentList = userLists.find(list => placeListId == list.list_id);
+        console.log(currentList.place_ids);
 
-        let select = userLists.find(list => placelistId == list.list_id);
-
-        if(select.reviews) {
-            select.places.map(place => {
-                place.reviews = select.reviews.filter(review => (
-                    review.place_id == place.id
-                ))
-            })
-            delete select.reviews;
-        }
-
-        setSelectedList(select);
+        if(currentList.place_ids.length == 0) return;
+        
+        currentList.places = places.filter(idx => currentList.place_ids.includes(idx.place_id));
+        console.log(currentList);
+        setSelectedList(currentList);
     }, [userLists])
 
 

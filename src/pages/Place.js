@@ -4,30 +4,45 @@ import Map from '../components/Map';
 import '../assets/style/pages/Place.css'
 import PlacePopup from './PlacePopup';
 import SearchBar from '../components/SearchBar';
+import { getCurrentPlaceReviews } from '../utils/supabaseJS';
 
 const { kakao } = window;
 
-const Place = () => {
+const Place = ({ listsId }) => {
     const [ placePosition, setPlacePosition ] = useState(null);
-    const [ placeInfo ] = useState(useLocation().state);
+    const [ reviewsInfo, setReviewsInfo] = useState([]);
+    const { id, lat, lng, name, phone, address } = useLocation().state;
     
     useEffect(()=> {
-        goToPlacePosition(placeInfo);
-        console.log();
-    }, [])
+        goToPlacePosition(lat, lng);        
+        
+        getCurrentPlaceReviews(id, listsId)
+            .then(data => {
+                setReviewsInfo(data);
+            }).catch((error) => {
+                console.log(error);
+            })
 
-    const goToPlacePosition = useCallback((place)=> {
-        const pos = new kakao.maps.LatLng(place.lat, place.lng);
+        return () => {
+        };
+    }, [listsId])
+    
+
+    const goToPlacePosition = useCallback((lat, lng)=> {
+        const pos = new kakao.maps.LatLng(lat, lng);
         setPlacePosition(pos);
     }, [])
 
     return (
         <div className='Place'>
             <SearchBar
-                displayText={placeInfo.name} />
+                displayText={name} />
             <Map goalPosition={placePosition} />
             <PlacePopup
-                placeInfo={placeInfo} />
+                reviewsInfo={reviewsInfo}
+                name={name}
+                address={address}
+                phone={phone} />
         </ div>
     );
 }
