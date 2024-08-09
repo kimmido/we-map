@@ -21,7 +21,7 @@ export async function getUserList(userId) {
     let { data: lists, error } = await supabase
       .from('lists')
       .select('*')
-      .or(`master.eq.${userId}`)
+      .or(`master.eq.${userId}, members.cs.{${userId}}`)
       .order('created_at', { ascending: true });
 
     if (error) throw error;
@@ -32,22 +32,22 @@ export async function getUserList(userId) {
   }
 }
 
-export async function getFollowList(userId) {
-  try {
-    let { data: lists, error } = await supabase
-      .from('lists')
-      .select('*')
-      // .or(`members.cs.{${userId}}`)
-      .contains(`members`, userId)
-      .order('created_at', { ascending: true });
+// export async function getFollowList(userId) {
+//   try {
+//     let { data: lists, error } = await supabase
+//       .from('lists')
+//       .select('*')
+//       .or(`members.cs.{${userId}}`)
+//       .contains(`members`, userId)
+//       .order('created_at', { ascending: true });
 
-    if (error) throw error;
-    return lists;
-  } catch (error) {
-    console.error('Error fetching user lists:', error);
-    throw error;
-  }
-}
+//     if (error) throw error;
+//     return lists;
+//   } catch (error) {
+//     console.error('Error fetching user lists:', error);
+//     throw error;
+//   }
+// }
 
 export async function getPlaces(placeIdArr) {
   try {

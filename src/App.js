@@ -27,19 +27,17 @@ const App = () => {
 
     const fetchData = async () => {
       try {
-        const [user, lists, f_list] = await Promise.all([getUser(userId), getUserList(userId), getFollowList([userId])]);
+        const [user, lists] = await Promise.all([getUser(userId), getUserList(userId)]);
         
         const placeIdArr = lists.reduce((arr, list) => arr.concat(list.place_ids), []);
         const places = await getPlaces(placeIdArr);
         
         if (!isMounted) return;
         console.log(lists);
-        console.log(f_list);
         // console.log(places);
         
         setUser(user);
         setUserLists(lists);
-        setFollowLists(f_list);
         setPlaces(places)
       } catch (err) {
         console.error('fetchData() 에러');
@@ -77,9 +75,9 @@ const App = () => {
           path="/mylists" 
           element={
             <MyListsBoard 
+              user={user}
               userLists={userLists}
-              setUserLists={setUserLists}
-              followLists={followLists} />
+              setUserLists={setUserLists} />
           } 
         />
 

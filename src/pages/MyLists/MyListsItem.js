@@ -8,7 +8,7 @@ import MyListsEditor from './MyListsEditor';
 import Button from '../../components/Button';
 import { type } from '@testing-library/user-event/dist/type';
 
-const MyListsItem = ({ id, icon, title, count, onDeleteItem }) => {
+const MyListsItem = ({ master, id, icon, title, count, onDeleteItem }) => {
     const [showButtons, setShowButtons] = useState(false);
     const [newTitle, setNewTitle] = useState(title);
     const [newIcon, setNewIcon] = useState(icon);
@@ -23,7 +23,7 @@ const MyListsItem = ({ id, icon, title, count, onDeleteItem }) => {
         onDeleteItem(id);
         // 삭제 로직을 여기에 추가하세요
     };
-    
+    console.log(id);
 
     return (
         <>
@@ -35,7 +35,9 @@ const MyListsItem = ({ id, icon, title, count, onDeleteItem }) => {
                         <LocationCount count={count} />
                     </div>
                 </Link>
-                <Button label={<FiMoreVertical />} onClick={() => setShowButtons(!showButtons)} type='icon'></Button>
+                { master &&
+                    <Button label={<FiMoreVertical />} onClick={() => setShowButtons(!showButtons)} type='icon' />
+                }
                 {showButtons && (
                     <ListControlButtons 
                         onEdit={handleEdit} 

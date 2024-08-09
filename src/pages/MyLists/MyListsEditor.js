@@ -15,7 +15,6 @@ const MyListsEditor = ({ currentListId, setShowModal, setUserLists, newTitle, ne
 
     const saveList = useCallback((currentListId, newTitle, newIcon) => {
         if(currentListId) {
-            setUserLists
             // setNewTitle(newTitle);
             setNewIcon(newIcon);
         
