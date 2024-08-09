@@ -21,7 +21,24 @@ export async function getUserList(userId) {
     let { data: lists, error } = await supabase
       .from('lists')
       .select('*')
-      .or(`master.eq.${userId}, members.cs.{${userId}}`)
+      .or(`master.eq.${userId}`)
+      .order('created_at', { ascending: true });
+
+    if (error) throw error;
+    return lists;
+  } catch (error) {
+    console.error('Error fetching user lists:', error);
+    throw error;
+  }
+}
+
+export async function getFollowList(userId) {
+  try {
+    let { data: lists, error } = await supabase
+      .from('lists')
+      .select('*')
+      // .or(`members.cs.{${userId}}`)
+      .contains(`members`, userId)
       .order('created_at', { ascending: true });
 
     if (error) throw error;
