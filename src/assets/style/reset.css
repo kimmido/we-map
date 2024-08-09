@@ -60,6 +60,11 @@ textarea {
     border: none;
 }
 
+input::placeholder {
+    color: var(--gray-50);
+    font-weight: normal;
+}
+
 button {
     font-size: 100%;
     vertical-align: middle;

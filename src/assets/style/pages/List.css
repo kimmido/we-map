@@ -4,14 +4,6 @@ h2 {
     text-align: center;
 }
 
-.listInsertBtn {
-    display: block;
-    width: 100%;
-    height: var(--size-btn-medium);
-    border-radius: 100px;
-    background-color: rgb(155, 206, 255);
-}
-
 .MyListsItem {
     position: relative;
     display: flex;

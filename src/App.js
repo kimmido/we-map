@@ -9,7 +9,7 @@ import './assets/style/variables.css';
 import './assets/style/reset.css';
 import './assets/style/App.css';
 import './assets/style/components/Components.css';
-import { getUser, getUserList, getPlaces } from './utils/supabaseJS';
+import { getUser, getUserList, getPlaces } from './utils/supabaseFatch';
 import { RealtimeLists } from './utils/supabaseRealtime';
 
 

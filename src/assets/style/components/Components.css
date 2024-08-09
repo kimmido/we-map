@@ -1,16 +1,29 @@
 /* === button === */
-.button.default {
+.button {
   display: block;
   height: var(--size-btn-medium);
+}
+
+.button.default {
   border: 1px solid var(--gray-30);
 }
 
 .button.complete {
   color: var(--gray-0);
   background-color: var(--success-40);
-  border: none;
 }
-  
+
+.button.icon {
+  width: var(--size-btn-medium);
+}
+
+.button.primary {
+  width: 100%;
+  color: var(--gray-0);
+  border-radius: var(--radius-round);
+  background-color: var(--primary-30);
+}
+
 /* === Gnb === */
 .Gnb {
   display: flex;

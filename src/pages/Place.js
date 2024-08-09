@@ -4,7 +4,7 @@ import Map from '../components/Map';
 import '../assets/style/pages/Place.css'
 import PlacePopup from './PlacePopup';
 import SearchBar from '../components/SearchBar';
-import { getCurrentPlaceReviews } from '../utils/supabaseJS';
+import { getCurrentPlaceReviews } from '../utils/supabaseFatch';
 
 const { kakao } = window;
 
