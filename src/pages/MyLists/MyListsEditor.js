@@ -5,9 +5,10 @@ import MyListsColorPicker from './MyListsColorPicker';
 // import Modal from '../../components/Modal';
 import Button from '../../components/Button';
 
-const MyListsEditor = ({ currentListId, setShowModal, setUserLists, listConfig, setListConfig }) => {
-    const [inputText, setInputText] = useState(listConfig.title);
-    const [selectedColor, setSelectedColor] = useState(listConfig.iconColor);
+const MyListsEditor = ({ currentListId, setShowModal, userListsDispatch, listConfig }) => {
+    const [currentConfig] = useState(listConfig || {});
+    const [newTitle, setNewTitle] = useState(currentConfig.title);
+    const [newIcon, setNewIcon] = useState(currentConfig.iconColor);
 
     const ModalClose  = useCallback(() => {
         setShowModal(false);
@@ -15,12 +16,20 @@ const MyListsEditor = ({ currentListId, setShowModal, setUserLists, listConfig, 
 
     const saveList = useCallback((currentListId, newTitle, newIcon) => {
         if(currentListId) {
-            // setNewTitle(newTitle);
-            // setNewIcon(newIcon)
+            userListsDispatch({
+                type: 'update',
+                payload: {
+                    list_id: currentListId,
+                    title: newTitle,
+                    icon_color: newIcon
+                }
+            })
         
             updateList(currentListId, newTitle, newIcon)
-            .then(data => console.log(data))
-            .catch(error => console.error(error))
+                .then(data => console.log(data))
+                .catch(error => console.error(error))
+        } else {
+            
         }
 
         setShowModal(false);
@@ -31,17 +40,17 @@ const MyListsEditor = ({ currentListId, setShowModal, setUserLists, listConfig, 
             <Modal>
                 <input
                     type='text'
-                    value={inputText}
-                    onChange={(e) => setInputText(e.target.value)}
+                    value={newTitle}
+                    onChange={(e) => setNewTitle(e.target.value)}
                     placeholder='목록 이름을 정해보세요'
                     className='listNameInput'
                 />
                 <MyListsColorPicker
-                    selectedColor={selectedColor}
-                    setSelectedColor={setSelectedColor} />
+                    selectedColor={newIcon}
+                    setSelectedColor={setNewIcon} />
                 <div className='popupActions'>
                     <Button label='취소' onClick={ModalClose} />
-                    <Button label='완료' onClick={() => saveList(currentListId, inputText, selectedColor)} type='complete' />
+                    <Button label='완료' onClick={() => saveList(currentListId, newTitle, newIcon)} type='complete' />
                 </div>
             </Modal>
         </div>

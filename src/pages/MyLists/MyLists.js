@@ -2,15 +2,15 @@ import React, { useEffect } from 'react';
 import MyListsItem from './MyListsItem';
 
 const MyLists = (props) => {
-    const { master, lists, setUserLists } = props;
+    const { master, lists, userListsDispatch } = props;
 
     useEffect(() => {
         console.table(lists);
     }, [lists])
 
     const handleDeleteItem = (id) => {
-        setUserLists??
-        setUserLists(lists.filter(list => list.list_id !== id));
+        // setUserLists??
+        // setUserLists(lists.filter(list => list.list_id !== id));
     };
 
     return (
@@ -24,7 +24,7 @@ const MyLists = (props) => {
                         title={list.title}
                         count={list.place_ids.length} 
                         master={master}
-                        setUserLists={setUserLists}
+                        userListsDispatch={userListsDispatch}
                         onDeleteItem={handleDeleteItem}
                     />
                 ))

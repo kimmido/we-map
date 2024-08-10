@@ -17,15 +17,19 @@ const ACTION_TYPE = {
 
 }
 
-const userListsReducer = (state, { type, payload}) => {
+const userListsReducer = (state, { type, payload }) => {
   switch (type) {
     case 'create':
       console.log(payload);
       return state = payload
-
-    case 'update':
       
-      return 
+    case 'update':
+      const { list_id, title, icon_color } = payload;
+      console.log(payload);
+
+      return state.map(item => (
+        item.list_id === list_id ? {...item, title, icon_color} : item
+      ))
 
     case 'delete':
       
@@ -40,9 +44,8 @@ const App = () => {
   const [user, setUser] = useState({});
   const [Lists, setLists] = useState([]);
   const [places, setPlaces] = useState([]);
-  const [userLists, userListsDispatch] = useReducer(userListsReducer, {});
+  const [userLists, userListsDispatch] = useReducer(userListsReducer, []);
   
-   
 
   useEffect(() => {
     let isMounted = true;

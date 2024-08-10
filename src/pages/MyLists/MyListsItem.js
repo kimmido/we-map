@@ -8,7 +8,7 @@ import MyListsEditor from './MyListsEditor';
 import Button from '../../components/Button';
 import { type } from '@testing-library/user-event/dist/type';
 
-const MyListsItem = ({ id, icon, title, count, master, setUserLists, onDeleteItem }) => {
+const MyListsItem = ({ id, icon, title, count, master, userListsDispatch, onDeleteItem }) => {
     const [showButtons, setShowButtons] = useState(false);
     const [newTitle, setNewTitle] = useState(title);
     const [newIcon, setNewIcon] = useState(icon);
@@ -53,7 +53,7 @@ const MyListsItem = ({ id, icon, title, count, master, setUserLists, onDeleteIte
                     currentListId={id}
                     setShowModal={setShowModal}
                     listConfig={listConfig}
-                    setListConfig={setListConfig} />
+                    userListsDispatch={userListsDispatch} />
             }
         </>
     );

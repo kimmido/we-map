@@ -1,7 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 const MyListsColorPicker = ({selectedColor, setSelectedColor}) => {
     const [colors] = useState(['#FEB9C8', '#BFA2DB', '#93C6E7', '#A1CCD1', '#CCD5AE', '#FCDDB0']);
+
+    useEffect(() => {
+        setSelectedColor(selectedColor || colors[0]);
+    }, [])
 
     return (
         <>

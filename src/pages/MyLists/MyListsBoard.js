@@ -5,7 +5,7 @@ import Gnb from '../../components/Gnb';
 import Button from '../../components/Button';
 import MyListsEditor from './MyListsEditor';
 
-const MyListsBoard = ({ user, userLists, setUserLists }) => {
+const MyListsBoard = ({ user, userLists, userListsDispatch }) => {
     const [showModal, setShowModal] = useState(false);    
     const [onLists, setOwnLists] = useState([]);    
     const [followLists, setFollowLists] = useState([]);    
@@ -29,11 +29,12 @@ const MyListsBoard = ({ user, userLists, setUserLists }) => {
                     <MyLists
                         master={true}
                         lists={onLists}
-                        setUserLists={setUserLists} />
+                        userListsDispatch={userListsDispatch} />
                     <h3>참여중인 목록</h3>
                     <MyLists
                         master={false}
-                        lists={followLists} />
+                        lists={followLists}
+                        userListsDispatch={userListsDispatch} />
                 </div>
             </div>
             <Gnb />
@@ -42,7 +43,7 @@ const MyListsBoard = ({ user, userLists, setUserLists }) => {
                 <MyListsEditor
                     currentListId={false}
                     setShowModal={setShowModal}
-                    setUserLists={setUserLists}/>
+                    userListsDispatch={userListsDispatch}/>
             }
         </div>
     );
