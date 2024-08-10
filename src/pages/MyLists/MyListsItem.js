@@ -8,10 +8,14 @@ import MyListsEditor from './MyListsEditor';
 import Button from '../../components/Button';
 import { type } from '@testing-library/user-event/dist/type';
 
-const MyListsItem = ({ master, id, icon, title, count, onDeleteItem }) => {
+const MyListsItem = ({ id, icon, title, count, master, setUserLists, onDeleteItem }) => {
     const [showButtons, setShowButtons] = useState(false);
     const [newTitle, setNewTitle] = useState(title);
     const [newIcon, setNewIcon] = useState(icon);
+    const [listConfig, setListConfig] = useState({
+        title: title,
+        iconColor: icon
+      });
     const [showModal, setShowModal] = useState(false);    
 
     const handleEdit = useCallback(() => {
@@ -23,15 +27,14 @@ const MyListsItem = ({ master, id, icon, title, count, onDeleteItem }) => {
         onDeleteItem(id);
         // 삭제 로직을 여기에 추가하세요
     };
-    console.log(id);
 
     return (
         <>
             <div className='MyListsItem'>
                 <Link to={`/placelist/${ id }`}>
-                    <IoHeartCircle className='listIcon' style={{color: newIcon}} />
+                    <IoHeartCircle className='listIcon' style={{color: listConfig.iconColor}} />
                     <div className='listInfo'>
-                        <strong className='listName'>{ newTitle }</strong>
+                        <strong className='listName'>{ listConfig.title }</strong>
                         <LocationCount count={count} />
                     </div>
                 </Link>
@@ -49,9 +52,8 @@ const MyListsItem = ({ master, id, icon, title, count, onDeleteItem }) => {
                 <MyListsEditor
                     currentListId={id}
                     setShowModal={setShowModal}
-                    newTitle={newTitle}
-                    newIcon={newIcon}
-                    setNewIcon={setNewIcon} />
+                    listConfig={listConfig}
+                    setListConfig={setListConfig} />
             }
         </>
     );

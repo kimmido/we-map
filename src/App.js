@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import MyListsBoard from './pages/MyLists/MyListsBoard';
@@ -11,16 +11,38 @@ import './assets/style/App.css';
 import './assets/style/components/Components.css';
 import { getUser, getUserList, getPlaces, getFollowList } from './utils/supabaseFatch';
 import { RealtimeLists } from './utils/supabaseRealtime';
+import { type } from '@testing-library/user-event/dist/type';
 
+const ACTION_TYPE = {
+
+}
+
+const userListsReducer = (state, { type, payload}) => {
+  switch (type) {
+    case 'create':
+      console.log(payload);
+      return state = payload
+
+    case 'update':
+      
+      return 
+
+    case 'delete':
+      
+      return
+  
+    default: return state;
+  }
+}
 
 const App = () => {
-  const [user, setUser] = useState({});
-  const [userLists, setUserLists] = useState([]);
-  const [followLists, setFollowLists] = useState([]);
-  const [listsId, setListId] = useState([]);
-  const [places, setPlaces] = useState([]);
   const [userId] = useState('05007f84-c3ca-4a60-8080-94b4ab9952e4');
+  const [user, setUser] = useState({});
+  const [Lists, setLists] = useState([]);
+  const [places, setPlaces] = useState([]);
+  const [userLists, userListsDispatch] = useReducer(userListsReducer, {});
   
+   
 
   useEffect(() => {
     let isMounted = true;
@@ -33,11 +55,13 @@ const App = () => {
         const places = await getPlaces(placeIdArr);
         
         if (!isMounted) return;
-        console.log(lists);
-        // console.log(places);
+        console.group('data fatch');
+        console.table(lists);
+        console.table(places);
+        console.groupEnd('data fatch');
         
         setUser(user);
-        setUserLists(lists);
+        setLists(lists);
         setPlaces(places)
       } catch (err) {
         console.error('fetchData() 에러');
@@ -53,11 +77,15 @@ const App = () => {
 
 
   useEffect(() => {
-    let listIdArr = userLists.map(list => list.list_id);
+    const newLists = Lists.map((list) => {
+      if(list.place_ids.length === 0) return list; 
 
-    setListId(listIdArr);
-    RealtimeLists(listIdArr);
-  }, [userLists])
+      list.places = places.filter(place => list.place_ids.includes(place.place_id));
+      return list;
+    })
+    
+    userListsDispatch({ type: 'create', payload: newLists })
+  }, [Lists, places])
 
 
   return (
@@ -77,7 +105,7 @@ const App = () => {
             <MyListsBoard 
               user={user}
               userLists={userLists}
-              setUserLists={setUserLists} />
+              userListsDispatch={userListsDispatch} />
           } 
         />
 
@@ -95,8 +123,6 @@ const App = () => {
           path='/place/:placeId'
           element={
           <Place
-            user={user}
-            listsId={listsId}
             userLists={userLists} />
           }
         />

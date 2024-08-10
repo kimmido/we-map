@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MyListsItem from './MyListsItem';
 
 const MyLists = (props) => {
     const { master, lists, setUserLists } = props;
 
+    useEffect(() => {
+        console.table(lists);
+    }, [lists])
+
     const handleDeleteItem = (id) => {
+        setUserLists??
         setUserLists(lists.filter(list => list.list_id !== id));
     };
 
@@ -14,14 +19,12 @@ const MyLists = (props) => {
                 lists.map((list) => (
                     <MyListsItem
                         key={list.id}
-                        master={master}
                         id={list.list_id}
                         icon={list.icon_color}
                         title={list.title}
-                        count={
-                            list.places?
-                            list.places.length : 0
-                        } 
+                        count={list.place_ids.length} 
+                        master={master}
+                        setUserLists={setUserLists}
                         onDeleteItem={handleDeleteItem}
                     />
                 ))

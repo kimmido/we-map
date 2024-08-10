@@ -5,9 +5,9 @@ import MyListsColorPicker from './MyListsColorPicker';
 // import Modal from '../../components/Modal';
 import Button from '../../components/Button';
 
-const MyListsEditor = ({ currentListId, setShowModal, setUserLists, newTitle, newIcon, setNewIcon }) => {
-    const [inputText, setInputText] = useState(newTitle);
-    const [selectedColor, setSelectedColor] = useState(newIcon);
+const MyListsEditor = ({ currentListId, setShowModal, setUserLists, listConfig, setListConfig }) => {
+    const [inputText, setInputText] = useState(listConfig.title);
+    const [selectedColor, setSelectedColor] = useState(listConfig.iconColor);
 
     const ModalClose  = useCallback(() => {
         setShowModal(false);
@@ -16,7 +16,7 @@ const MyListsEditor = ({ currentListId, setShowModal, setUserLists, newTitle, ne
     const saveList = useCallback((currentListId, newTitle, newIcon) => {
         if(currentListId) {
             // setNewTitle(newTitle);
-            setNewIcon(newIcon);
+            // setNewIcon(newIcon)
         
             updateList(currentListId, newTitle, newIcon)
             .then(data => console.log(data))

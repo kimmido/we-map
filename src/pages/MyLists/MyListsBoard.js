@@ -5,10 +5,9 @@ import Gnb from '../../components/Gnb';
 import Button from '../../components/Button';
 import MyListsEditor from './MyListsEditor';
 
-const MyListsBoard = (props) => {
-    const { user, userLists, setUserLists } = props;
+const MyListsBoard = ({ user, userLists, setUserLists }) => {
     const [showModal, setShowModal] = useState(false);    
-    const [masterLists, setMasterLists] = useState([]);    
+    const [onLists, setOwnLists] = useState([]);    
     const [followLists, setFollowLists] = useState([]);    
    
     const newCreateList = () => {
@@ -16,9 +15,9 @@ const MyListsBoard = (props) => {
     }
 
     useEffect(() => {
-        setMasterLists(userLists.filter(list => list.master == user.id));
+        setOwnLists(userLists.filter(list => list.master == user.id));
         setFollowLists(userLists.filter(list => list.master != user.id));
-    }, [])
+    }, [userLists])
 
     return (
         <div className='MyListsBoard'>
@@ -29,7 +28,7 @@ const MyListsBoard = (props) => {
                     <h3>내 목록</h3>
                     <MyLists
                         master={true}
-                        lists={masterLists}
+                        lists={onLists}
                         setUserLists={setUserLists} />
                     <h3>참여중인 목록</h3>
                     <MyLists
