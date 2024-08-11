@@ -7,36 +7,41 @@ import LocationCount from '../../components/LocationCount';
 import MyListsEditor from './MyListsEditor';
 import Button from '../../components/Button';
 import { type } from '@testing-library/user-event/dist/type';
-import { updateList } from '../../utils/supabaseFatch';
+import { deleteList, updateList } from '../../utils/supabaseFatch';
 
-const MyListsItem = ({ id, icon, title, count, master, userListsDispatch, onDeleteItem }) => {
+const MyListsItem = ({ id, icon, title, count, master, userListsDispatch }) => {
     const [showButtons, setShowButtons] = useState(false);
     const [showModal, setShowModal] = useState(false);    
 
-    const handleEdit = useCallback(() => {
+    const handleEditor = useCallback(() => {
         setShowModal(true);
         setShowButtons(false);
     }, []);
 
-    const handleDelete = () => {
-        onDeleteItem(id);
-        // 삭제 로직을 여기에 추가하세요
-    };
-    
-    const saveList = useCallback((currentListId, newTitle, newIcon) => {
+    const saveList = useCallback((listId, newTitle, newIcon) => {
         userListsDispatch({
             type: 'UPDATE',
             payload: {
-                list_id: currentListId,
+                list_id: listId,
                 title: newTitle,
                 icon_color: newIcon
             }
         })
     
-        updateList(currentListId, newTitle, newIcon)
-            .then(data => console.log(data))
-        .catch(error => console.error(error))
+        updateList(listId, newTitle, newIcon)
+            .catch(error => console.error(error))
         setShowModal(false);
+    }, []);
+
+    const removeList = useCallback(() => {
+        userListsDispatch({
+            type: 'DELETE',
+            payload: {
+                list_id: id,
+            }
+        })
+
+        deleteList(id)
     }, []);
 
     return (
@@ -54,8 +59,8 @@ const MyListsItem = ({ id, icon, title, count, master, userListsDispatch, onDele
                 }
                 {showButtons && (
                     <ListControlButtons 
-                        onEdit={handleEdit} 
-                        onDelete={handleDelete} />
+                        onEdit={handleEditor} 
+                        onDelete={removeList} />
                 )}
             </div>
                 

@@ -43,8 +43,9 @@ const userListsReducer = (state, { type, payload }) => {
     }
 
     case 'DELETE':
+      const { list_id } = payload;
       
-      return
+      return state.filter(list => list.list_id != list_id)
   
     default: return state;
   }

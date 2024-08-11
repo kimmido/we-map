@@ -4,15 +4,6 @@ import MyListsItem from './MyListsItem';
 const MyLists = (props) => {
     const { master, lists, userListsDispatch } = props;
 
-    useEffect(() => {
-        console.table(lists);
-    }, [lists])
-
-    const handleDeleteItem = (id) => {
-        // setUserLists??
-        // setUserLists(lists.filter(list => list.list_id !== id));
-    };
-
     return (
         <div className='MyLists'>
             {
@@ -25,7 +16,6 @@ const MyLists = (props) => {
                         count={list.place_ids.length} 
                         master={master}
                         userListsDispatch={userListsDispatch}
-                        onDeleteItem={handleDeleteItem}
                     />
                 ))
             }

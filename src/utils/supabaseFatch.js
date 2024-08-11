@@ -12,7 +12,6 @@ export async function getUser(userId) {
     return user;
   } catch (error) {
     console.error('Error fetching user:', error);
-    throw error;
   }
 }
   
@@ -28,26 +27,8 @@ export async function getUserList(userId) {
     return lists;
   } catch (error) {
     console.error('Error fetching user lists:', error);
-    throw error;
   }
 }
-
-// export async function getFollowList(userId) {
-//   try {
-//     let { data: lists, error } = await supabase
-//       .from('lists')
-//       .select('*')
-//       .or(`members.cs.{${userId}}`)
-//       .contains(`members`, userId)
-//       .order('created_at', { ascending: true });
-
-//     if (error) throw error;
-//     return lists;
-//   } catch (error) {
-//     console.error('Error fetching user lists:', error);
-//     throw error;
-//   }
-// }
 
 export async function getPlaces(placeIdArr) {
   try {
@@ -60,7 +41,6 @@ export async function getPlaces(placeIdArr) {
     return data;
   } catch (error) {
     console.error('Error fetching place:', error);
-    throw error;
   }
 }
 
@@ -76,7 +56,6 @@ export async function getCurrentPlaceReviews(placeId, listIdArr) {
     return data;
   } catch (error) {
     console.error('Error fetching current place review:', error);
-    throw error;
   }
 }
 
@@ -100,13 +79,12 @@ export async function insertList(userId, titleTxt, color) {
     return list;
   } catch (error) {
     console.error('Error insert list:', error);
-    throw error;
   }
 }
 
 export async function updateList(listId, titleTxt, color) {
   try {
-    let { data: list, error } = await supabase
+    const { data: list, error } = await supabase
       .from('lists')
       .update({ title: titleTxt, icon_color: color })
       .eq('list_id', listId)
@@ -116,6 +94,18 @@ export async function updateList(listId, titleTxt, color) {
     return list;
   } catch (error) {
     console.error('Error updating list:', error);
-    throw error;
+  }
+}
+
+export async function deleteList(listId) {
+  try {
+    const { error } = await supabase
+      .from('lists')
+      .delete()
+      .eq('list_id', listId)
+
+    if (error) throw error;
+  } catch (error) {
+    console.error('Error delete list:', error);
   }
 }
