@@ -5,8 +5,9 @@ import MyListsColorPicker from './MyListsColorPicker';
 // import Modal from '../../components/Modal';
 import Button from '../../components/Button';
 
-const MyListsEditor = ({ currentListId, setShowModal, userListsDispatch, listConfig }) => {
+const MyListsEditor = ({ setShowModal, userListsDispatch, listConfig }) => {
     const [currentConfig] = useState(listConfig || {});
+    const [currentListId] = useState(currentConfig.id);
     const [newTitle, setNewTitle] = useState(currentConfig.title);
     const [newIcon, setNewIcon] = useState(currentConfig.iconColor);
 

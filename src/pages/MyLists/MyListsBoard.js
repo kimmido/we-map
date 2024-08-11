@@ -7,7 +7,7 @@ import MyListsEditor from './MyListsEditor';
 
 const MyListsBoard = ({ user, userLists, userListsDispatch }) => {
     const [showModal, setShowModal] = useState(false);    
-    const [onLists, setOwnLists] = useState([]);    
+    const [ownLists, setOwnLists] = useState([]);    
     const [followLists, setFollowLists] = useState([]);    
    
     const newCreateList = () => {
@@ -28,7 +28,7 @@ const MyListsBoard = ({ user, userLists, userListsDispatch }) => {
                     <h3>내 목록</h3>
                     <MyLists
                         master={true}
-                        lists={onLists}
+                        lists={ownLists}
                         userListsDispatch={userListsDispatch} />
                     <h3>참여중인 목록</h3>
                     <MyLists

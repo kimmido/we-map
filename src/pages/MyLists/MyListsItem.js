@@ -10,12 +10,6 @@ import { type } from '@testing-library/user-event/dist/type';
 
 const MyListsItem = ({ id, icon, title, count, master, userListsDispatch, onDeleteItem }) => {
     const [showButtons, setShowButtons] = useState(false);
-    const [newTitle, setNewTitle] = useState(title);
-    const [newIcon, setNewIcon] = useState(icon);
-    const [listConfig, setListConfig] = useState({
-        title: title,
-        iconColor: icon
-      });
     const [showModal, setShowModal] = useState(false);    
 
     const handleEdit = useCallback(() => {
@@ -32,9 +26,9 @@ const MyListsItem = ({ id, icon, title, count, master, userListsDispatch, onDele
         <>
             <div className='MyListsItem'>
                 <Link to={`/placelist/${ id }`}>
-                    <IoHeartCircle className='listIcon' style={{color: listConfig.iconColor}} />
+                    <IoHeartCircle className='listIcon' style={{color: icon}} />
                     <div className='listInfo'>
-                        <strong className='listName'>{ listConfig.title }</strong>
+                        <strong className='listName'>{ title }</strong>
                         <LocationCount count={count} />
                     </div>
                 </Link>
@@ -50,9 +44,8 @@ const MyListsItem = ({ id, icon, title, count, master, userListsDispatch, onDele
                 
             {showModal && 
                 <MyListsEditor
-                    currentListId={id}
                     setShowModal={setShowModal}
-                    listConfig={listConfig}
+                    listConfig={{ id: id, title: title, iconColor: icon }}
                     userListsDispatch={userListsDispatch} />
             }
         </>
