@@ -10,8 +10,6 @@ import './assets/style/reset.css';
 import './assets/style/App.css';
 import './assets/style/components/Components.css';
 import { getUser, getUserList, getPlaces, getFollowList } from './utils/supabaseFatch';
-import { RealtimeLists } from './utils/supabaseRealtime';
-import { type } from '@testing-library/user-event/dist/type';
 
 const ACTION_TYPE = {
 
@@ -19,19 +17,32 @@ const ACTION_TYPE = {
 
 const userListsReducer = (state, { type, payload }) => {
   switch (type) {
-    case 'create':
-      console.log(payload);
+    case 'CREATE':
       return payload
       
-    case 'update':
-      const { list_id, title, icon_color } = payload;
+    case 'INSERT': {
+      const { master, list_id, title, icon_color } = payload;
       console.log(payload);
+
+      return [...state, {
+        master,
+        list_id,
+        title,
+        icon_color, 
+        place_ids: [],
+        members: [],
+      }]
+    }
+
+    case 'UPDATE': {
+      const { list_id, title, icon_color } = payload;
 
       return state.map(list => (
         list.list_id === list_id ? {...list, title, icon_color} : list
       ))
+    }
 
-    case 'delete':
+    case 'DELETE':
       
       return
   
@@ -45,11 +56,6 @@ const App = () => {
   const [Lists, setLists] = useState([]);
   const [places, setPlaces] = useState([]);
   const [userLists, userListsDispatch] = useReducer(userListsReducer, []);
-
-  const arr = [0,1,2]
-  const arr2 = arr.map(idx => idx);
-  console.log(arr == arr2);
-  
 
   useEffect(() => {
     let isMounted = true;
@@ -91,7 +97,7 @@ const App = () => {
       return list;
     })
     
-    userListsDispatch({ type: 'create', payload: newLists })
+    userListsDispatch({ type: 'CREATE', payload: newLists })
   }, [Lists, places])
 
 

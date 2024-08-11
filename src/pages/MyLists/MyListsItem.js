@@ -7,6 +7,7 @@ import LocationCount from '../../components/LocationCount';
 import MyListsEditor from './MyListsEditor';
 import Button from '../../components/Button';
 import { type } from '@testing-library/user-event/dist/type';
+import { updateList } from '../../utils/supabaseFatch';
 
 const MyListsItem = ({ id, icon, title, count, master, userListsDispatch, onDeleteItem }) => {
     const [showButtons, setShowButtons] = useState(false);
@@ -21,6 +22,22 @@ const MyListsItem = ({ id, icon, title, count, master, userListsDispatch, onDele
         onDeleteItem(id);
         // 삭제 로직을 여기에 추가하세요
     };
+    
+    const saveList = useCallback((currentListId, newTitle, newIcon) => {
+        userListsDispatch({
+            type: 'UPDATE',
+            payload: {
+                list_id: currentListId,
+                title: newTitle,
+                icon_color: newIcon
+            }
+        })
+    
+        updateList(currentListId, newTitle, newIcon)
+            .then(data => console.log(data))
+        .catch(error => console.error(error))
+        setShowModal(false);
+    }, []);
 
     return (
         <>
@@ -44,9 +61,10 @@ const MyListsItem = ({ id, icon, title, count, master, userListsDispatch, onDele
                 
             {showModal && 
                 <MyListsEditor
+                    saveId={id}
                     setShowModal={setShowModal}
                     listConfig={{ id: id, title: title, iconColor: icon }}
-                    userListsDispatch={userListsDispatch} />
+                    saveList={saveList} />
             }
         </>
     );

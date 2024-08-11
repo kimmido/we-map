@@ -1,38 +1,17 @@
 import React, { useCallback, useState } from 'react';
 import Modal from '../../components/Modal';
-import { updateList } from '../../utils/supabaseFatch';
+import { insertList, updateList } from '../../utils/supabaseFatch';
 import MyListsColorPicker from './MyListsColorPicker';
 // import Modal from '../../components/Modal';
 import Button from '../../components/Button';
 
-const MyListsEditor = ({ setShowModal, userListsDispatch, listConfig }) => {
+const MyListsEditor = ({ saveId, listConfig, setShowModal, saveList }) => {
     const [currentConfig] = useState(listConfig || {});
     const [currentListId] = useState(currentConfig.id);
-    const [newTitle, setNewTitle] = useState(currentConfig.title);
-    const [newIcon, setNewIcon] = useState(currentConfig.iconColor);
+    const [newTitle, setNewTitle] = useState(currentConfig.title || '');
+    const [newIcon, setNewIcon] = useState(currentConfig.iconColor || '');
 
-    const ModalClose  = useCallback(() => {
-        setShowModal(false);
-    }, []);
-
-    const saveList = useCallback((currentListId, newTitle, newIcon) => {
-        if(currentListId) {
-            userListsDispatch({
-                type: 'update',
-                payload: {
-                    list_id: currentListId,
-                    title: newTitle,
-                    icon_color: newIcon
-                }
-            })
-        
-            updateList(currentListId, newTitle, newIcon)
-                .then(data => console.log(data))
-                .catch(error => console.error(error))
-        } else {
-            
-        }
-
+    const closeModal  = useCallback(() => {
         setShowModal(false);
     }, []);
 
@@ -50,8 +29,8 @@ const MyListsEditor = ({ setShowModal, userListsDispatch, listConfig }) => {
                     selectedColor={newIcon}
                     setSelectedColor={setNewIcon} />
                 <div className='popupActions'>
-                    <Button label='취소' onClick={ModalClose} />
-                    <Button label='완료' onClick={() => saveList(currentListId, newTitle, newIcon)} type='complete' />
+                    <Button label='취소' onClick={closeModal} />
+                    <Button label='완료' onClick={() => saveList(saveId, newTitle, newIcon)} type='complete' />
                 </div>
             </Modal>
         </div>

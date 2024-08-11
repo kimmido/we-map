@@ -80,6 +80,30 @@ export async function getCurrentPlaceReviews(placeId, listIdArr) {
   }
 }
 
+export async function insertList(userId, titleTxt, color) {
+  try {
+    const { data: list, error } = await supabase
+      .from('lists')
+      .insert([
+        { 
+          master: userId, 
+          title: titleTxt,
+          icon_color: color, 
+          place_ids: [],
+          members: [], 
+        },
+      ])
+      .select()
+      .single()
+
+    if (error) throw error;
+    return list;
+  } catch (error) {
+    console.error('Error insert list:', error);
+    throw error;
+  }
+}
+
 export async function updateList(listId, titleTxt, color) {
   try {
     let { data: list, error } = await supabase

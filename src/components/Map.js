@@ -2,8 +2,7 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 
 const { kakao } = window;
 
-const Map = (props) => {
-  const { goalPosition , selectedList } = props;
+const Map = ({ goalPosition , selectedList }) => {
   const [, setMarkers] = useState([]);
   const mapContainer = useRef(null);
   
@@ -39,6 +38,9 @@ const Map = (props) => {
   
   const displayListMarkers = useCallback((selectedList) => {
     const map = createMap();
+    console.log(selectedList.places)
+
+    if(!selectedList.places) return;
     // 좌표 저장
     const positions = selectedList.places.map(place => new kakao.maps.LatLng(place.lat, place.lng));
 
