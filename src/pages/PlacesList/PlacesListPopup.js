@@ -13,7 +13,7 @@ const PlacesListPopup = (props) => {
         <div className='PlacesListPopup'>
             <IoHeartCircle className='listIcon' style={{color: selectedList.icon_color}} />
             <div>
-                <button><TbExternalLink /></button>
+                {/* <button><TbExternalLink /></button> */}
                 <h2>{selectedList.title}</h2>
                 <span>
                     <TiLocation />

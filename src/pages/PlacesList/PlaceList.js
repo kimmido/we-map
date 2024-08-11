@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiMoreVertical } from "react-icons/fi";
+import ListControlButtons from '../../components/ListControlButtons';
+import Button from '../../components/Button';
 
-const PlaceList = (props) => {
-    const { places = [], selectedList } = props;
+const PlaceList = ({ places = [], selectedList }) => {
     
     return (
         <div className='PlaceList'>
@@ -32,7 +33,6 @@ const PlaceList = (props) => {
                             }
                         </div>
                     </Link>
-                    <button className='listEditBtn'><FiMoreVertical /></button>
                 </div>
             ))}
         </div>

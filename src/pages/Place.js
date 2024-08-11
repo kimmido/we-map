@@ -8,9 +8,9 @@ import { getCurrentPlaceReviews } from '../utils/supabaseFatch';
 
 const { kakao } = window;
 
-const Place = ({ userLists }) => {
+const Place = ({ user, userLists }) => {
     const [ placePosition, setPlacePosition ] = useState(null);
-    const [ reviewsInfo, setReviewsInfo] = useState([]);
+    const [ reviews, setReviews] = useState([]);
     const { id, lat, lng, name, phone, address } = useLocation().state;
     
     useEffect(()=> {
@@ -20,7 +20,7 @@ const Place = ({ userLists }) => {
         
         getCurrentPlaceReviews(id, listIdArr)
             .then(data => {
-                setReviewsInfo(data);
+                setReviews(data);
             }).catch((error) => {
                 console.log(error);
             })
@@ -41,7 +41,8 @@ const Place = ({ userLists }) => {
                 displayText={name} />
             <Map goalPosition={placePosition} />
             <PlacePopup
-                reviewsInfo={reviewsInfo}
+                user={user}
+                reviews={reviews}
                 name={name}
                 address={address}
                 phone={phone} />

@@ -22,8 +22,6 @@ const userListsReducer = (state, { type, payload }) => {
       
     case 'INSERT': {
       const { master, list_id, title, icon_color } = payload;
-      console.log(payload);
-
       return [...state, {
         master,
         list_id,
@@ -36,7 +34,6 @@ const userListsReducer = (state, { type, payload }) => {
 
     case 'UPDATE': {
       const { list_id, title, icon_color } = payload;
-
       return state.map(list => (
         list.list_id === list_id ? {...list, title, icon_color} : list
       ))
@@ -44,10 +41,10 @@ const userListsReducer = (state, { type, payload }) => {
 
     case 'DELETE':
       const { list_id } = payload;
-      
       return state.filter(list => list.list_id != list_id)
   
-    default: return state;
+    default: 
+      return state;
   }
 }
 
@@ -137,6 +134,7 @@ const App = () => {
           path='/place/:placeId'
           element={
           <Place
+            user={user}
             userLists={userLists} />
           }
         />

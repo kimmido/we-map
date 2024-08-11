@@ -6,7 +6,6 @@ import ListControlButtons from '../../components/ListControlButtons';
 import LocationCount from '../../components/LocationCount';
 import MyListsEditor from './MyListsEditor';
 import Button from '../../components/Button';
-import { type } from '@testing-library/user-event/dist/type';
 import { deleteList, updateList } from '../../utils/supabaseFatch';
 
 const MyListsItem = ({ id, icon, title, count, master, userListsDispatch }) => {
@@ -57,11 +56,11 @@ const MyListsItem = ({ id, icon, title, count, master, userListsDispatch }) => {
                 { master &&
                     <Button label={<FiMoreVertical />} onClick={() => setShowButtons(!showButtons)} type='icon' />
                 }
-                {showButtons && (
+                { showButtons && 
                     <ListControlButtons 
                         onEdit={handleEditor} 
                         onDelete={removeList} />
-                )}
+                }
             </div>
                 
             {showModal && 
