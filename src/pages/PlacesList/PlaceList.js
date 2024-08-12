@@ -9,7 +9,7 @@ const PlaceList = ({ places = [], selectedList }) => {
     return (
         <div className='PlaceList'>
             { places.map(place => (
-                <div className='PlaceListItem' key={place.place_id}>
+                <div className='PlaceListItem' key={place.place_id} style={{padding: '12px'}}>
                     <Link 
                         to={`/place/${place.place_id}`}
                         state={{
@@ -21,9 +21,9 @@ const PlaceList = ({ places = [], selectedList }) => {
                             address: place.address,
                         }}>
                         <strong>{ place.name }</strong>
-                        <address>{ place.address }</address>
+                        <address style={{marginTop: '6px', display: 'block'}}>{ place.address }</address>
                         <div className='reviews'>
-                            <span>친구의 리뷰 { place.reviews[0].count }</span>
+                            <span style={{marginTop: '10px', display: 'block'}}>친구의 리뷰 { place.reviews[0].count }</span>
                             {
                                 place.reviews.length != 0 && (
                                     <div>

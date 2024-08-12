@@ -15,13 +15,15 @@ const PlacesListPopup = (props) => {
             <div>
                 {/* <button><TbExternalLink /></button> */}
                 <h2>{selectedList.title}</h2>
-                <span>
-                    <TiLocation />
-                    {   selectedList.places? 
-                        selectedList.places.length : 0 
-                    }
-                </span>
-                <span>{user.name}의 목록</span>
+                <div style={{padding: '12px'}}>
+                    <span>
+                        <TiLocation />
+                        {   selectedList.places? 
+                            selectedList.places.length : 0 
+                        }
+                    </span>
+                    <span>{user.name}의 목록</span>
+                </div>
             </div>
             <PlaceList 
                 selectedList={selectedList}
