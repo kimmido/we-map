@@ -1,25 +1,38 @@
 import React from 'react';
+import { BsBookmark } from "react-icons/bs";
+// import { BsBookmarkCheckFill } from "react-icons/bs";
+// import { BsFillBookmarkHeartFill } from "react-icons/bs";
+import { PiPhoneThin } from "react-icons/pi";
+import { BsArrow90DegRight } from "react-icons/bs";
+import PlaceReview from './PlaceReview';
 
 const PlacePopUp = (props) => {
-    const { name, address, phone, reviews, user } = props;
+    const { id, name, address, phone, reviews, user } = props;
     // console.log(placeReviews);
     const master = user.name;
 
     return (
         <div className='PlacePopUp'>
-            <h3>{ name }</h3>
-            <p>{ address }</p>
-            <p>{ phone }</p>
+            <div>
+                <h3>{ name }</h3>
+                <p>{ address }</p>
+            </div>
+            <div>
+                <a href={`tel:${ phone }`}><PiPhoneThin style={{fontSize: '24px'}} />전화</a>
+                <button><BsBookmark />저장</button>
+                <a href={`https://map.kakao.com/link/to/${id}`} target='_blank'><BsArrow90DegRight />길찾기</a>
+            </div>
             <div>
                 <h4>리뷰 { reviews.length }</h4>
                 {
-                    reviews.map(idx => 
-                        <div key={idx.id}>
-                            <span style={{background: idx.lists.icon_color, width: '10px', height: '10px', display: 'block'}}></span>
-                            <span>{idx.lists.title}</span>
-                            <span>'{idx.users.name == master? '나' : idx.users.name}'의 리뷰</span>
-                            <p>{idx.text}</p>
-                        </div>
+                    reviews.map(review => 
+                        <PlaceReview 
+                            key={review.id}
+                            listIcon={review.lists.icon_color}
+                            listTitle={review.lists.title}
+                            author={review.users.name}
+                            master={master}
+                            text={review.text} />
                     )
                 }
             </div>

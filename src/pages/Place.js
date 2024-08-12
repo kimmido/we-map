@@ -42,6 +42,7 @@ const Place = ({ user, userLists }) => {
             <Map goalPosition={placePosition} />
             <PlacePopup
                 user={user}
+                id={id}
                 reviews={reviews}
                 name={name}
                 address={address}

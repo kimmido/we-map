@@ -2,8 +2,10 @@
     position: absolute;
     bottom: var(--spacer-5); left: var(--spacer-5);
     width: calc(100% - var(--spacer-5) * 2);
-    border-radius: 15px;
-    background-color: #fff;
-  
+    padding: var(--spacer-5);
+    border-radius: var(--radius-square);
+    background-color: var(--gray-0);
+    box-shadow: var(--shadow-popup);
+
     z-index: 10;
   }
