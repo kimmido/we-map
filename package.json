@@ -22,7 +22,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://kimmido.github.io/we-map/",
+  "homepage": "https://kimmido.github.io/we-map",
   "eslintConfig": {
     "extends": [
       "react-app",
