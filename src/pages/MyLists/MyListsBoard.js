@@ -38,18 +38,22 @@ const MyListsBoard = ({ user, userLists, userListsDispatch }) => {
         setShowModal(false);
     }, []);
 
+    const style = {
+        marginTop: '28px'
+    }
+
     return (
         <div className='MyListsBoard'>
             <div className='contentsBoxWithGnb'>
-                <h2>목록 보기</h2>
+                <h2 style={{marginTop: '20px', marginBottom: '12px'}}>목록 보기</h2>
                 <div className='container'>
                     <Button label='새 목록' onClick={openModal} type='primary' />
-                    <h3>내 목록</h3>
+                    <h3 style={style}>내 목록</h3>
                     <MyLists
                         master={true}
                         lists={ownLists}
                         userListsDispatch={userListsDispatch} />
-                    <h3>참여중인 목록</h3>
+                    <h3 style={style}>참여중인 목록</h3>
                     <MyLists
                         master={false}
                         lists={followLists}
