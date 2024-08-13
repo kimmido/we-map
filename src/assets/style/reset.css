@@ -32,6 +32,8 @@ button,
 }
 
 html, body{
+    max-width: var(--width-max);
+    margin: 0 auto;
     font-family: 'Pretendard Variable';
     -webkit-text-size-adjust : none; 
     -ms-text-size-adjust : none; 
