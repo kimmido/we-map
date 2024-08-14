@@ -1,8 +1,0 @@
-{
-    "rewrites": [
-      {
-        "source": "/api/kakao/maps",
-        "destination": "/api/kakao-maps-proxy"
-      }
-    ]
-  }
