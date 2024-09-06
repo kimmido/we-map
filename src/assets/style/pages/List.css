@@ -45,7 +45,7 @@ h2 {
     background-color: var(--gray-0);
     box-shadow: var(--shadow-popup);
 
-    z-index: 10;
+    z-index: var(--z-index-map-overlay);
 }
 
 .PlaceListItem {
@@ -61,7 +61,7 @@ h2 {
     border-radius: var(--radius-square);
     box-shadow: var(--shadow-btn-top);
   
-    z-index: 10;
+    z-index: var(--z-index-map-overlay);
 }
 
 .PlacesListTopBtnIcon {

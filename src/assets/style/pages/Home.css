@@ -40,7 +40,7 @@
   border-radius: 50%;
   background-color: #222;
 
-  z-index: 10;
+  z-index: var(--z-index-map-overlay);
   
   /* 아이콘 속성 */
   color: var(--gray-0);

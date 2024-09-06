@@ -26,13 +26,14 @@
 
 /* === Gnb === */
 .Gnb {
+  position: relative;
   display: flex;
   width: 100%;
   height: var(--gnb-H);
   background-color: #fff;
   box-shadow: var(--shadow-popup);  
 
-  z-index: 10;
+  z-index: var(--z-index-gnb);
 }
 
 .Gnb > a {
@@ -89,11 +90,10 @@
   width: calc(100% - var(--spacer-5) * 2);
   height: var(--size-btn-medium);
   background-color: var(--gray-0);
-  /* border: 1px solid var(--gray-30); */
-  border-radius: 100px;
+  border-radius: var(--radius-round);
   box-shadow: var(--shadow-btn-top);
 
-  z-index: 10;
+  z-index: var(--z-index-map-overlay);
 }
 
 .searchBarIcon{
@@ -132,7 +132,7 @@
   border: 1px solid var(--gray-70);
   background-color: var(--gray-0);
   
-  z-index: 10;
+  z-index: var(--z-index-folder-menu);
 }
 
 .ListControlButtons > button {
@@ -154,7 +154,7 @@
   background: rgba(0, 0, 0, 0.5); /* 배경 흐리게 */
   transform: translateX(-50%);
 
-  z-index: var(--z-index-fixed);
+  z-index: var(--z-index-modal);
 } 
 
 .modalContent {

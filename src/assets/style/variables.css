@@ -19,6 +19,12 @@
   --z-index-popup: 70;
   --z-index-fixed: 100;
   
+  --z-index-map-overlay: 10;
+  --z-index-folder-menu: 10;
+  --z-index-gnb: 10;
+  --z-index-modal: 10;
+
+
   /* 크기 */
   --size-btn-small: 30px;
   --size-btn-medium: 44px;
