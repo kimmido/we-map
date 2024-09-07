@@ -1,20 +1,37 @@
 .PlacePopUp {
-    position: absolute;
-    bottom: var(--spacer-5); left: var(--spacer-5);
-    width: calc(100% - var(--spacer-5) * 2);
-    padding: var(--spacer-5);
-    border-radius: var(--radius-square);
-    background-color: var(--gray-0);
-    box-shadow: var(--shadow-popup);
+  position: absolute;
+  bottom: var(--spacer-5); left: var(--spacer-5);
+  width: calc(100% - var(--spacer-5) * 2);
+  padding: var(--spacer-5);
+  border-radius: var(--radius-square);
+  background-color: var(--gray-0);
+  box-shadow: var(--shadow-popup);
+  
+  z-index: var(--z-index-map-overlay);
+}
 
-    z-index: var(--z-index-map-overlay);
-  }
+.PlaceActionPanel {
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+  margin: var(--spacer-4) 0;
+}
 
-  .PlaceActionPanel {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 60px;
-    margin-top: 12px;
-    margin-bottom: 12px;
-  }
+.placeActionBtn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 var(--spacer-4);
+}
+
+.placeActionBtn span {
+  display: block;
+  margin-top: 24px;
+}
+
+/* .placeActionBtn span::before {
+  display: block;
+  content: url(../../images/icon_bookmark.svg);
+  background-image: url(../../images/icon_bookmark.svg);
+} */

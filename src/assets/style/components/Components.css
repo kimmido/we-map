@@ -21,7 +21,7 @@
   width: 100%;
   color: var(--gray-0);
   border-radius: var(--radius-round);
-  background-color: var(--primary-30);
+  background-color: var(--color-main);
 }
 
 /* === Gnb === */

@@ -10,7 +10,7 @@ h2 {
     justify-content: space-between;
     column-gap: 10px;
     padding: var(--spacer-5) 0;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--gray-30);
 }
 
 .MyListsItem > a {
