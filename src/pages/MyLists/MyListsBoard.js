@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import '../../assets/style/pages/List.css'
 import MyLists from './MyLists';
 import Gnb from '../../components/Gnb';
-import Button from '../../components/Button';
+import Button from '../../components/ui/Button';
 import MyListsEditor from './MyListsEditor';
 import { insertList } from '../../utils/supabaseFatch';
 

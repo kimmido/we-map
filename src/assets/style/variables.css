@@ -90,7 +90,7 @@
   --success-80: #00370c;
   --success-90: #002207;
   
-  --shadow-popup: 0 -4px 6px rgba(0, 0, 0, .08);
+  --shadow-popup: 0 -4px 10px rgba(0, 0, 0, 0.2);
   --shadow-btn-top: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
   --shadow-btn-on-map: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
 

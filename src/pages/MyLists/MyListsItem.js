@@ -5,7 +5,7 @@ import { FiMoreVertical } from "react-icons/fi";
 import ListControlButtons from '../../components/ListControlButtons';
 import LocationCount from '../../components/LocationCount';
 import MyListsEditor from './MyListsEditor';
-import Button from '../../components/Button';
+import Button from '../../components/ui/Button';
 import { deleteList, updateList } from '../../utils/supabaseFatch';
 
 const MyListsItem = ({ id, icon, title, count, master, userListsDispatch }) => {

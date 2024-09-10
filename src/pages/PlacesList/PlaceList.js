@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FiMoreVertical } from "react-icons/fi";
 import ListControlButtons from '../../components/ListControlButtons';
-import Button from '../../components/Button';
+import Button from '../../components/ui/Button';
 
 const PlaceList = ({ places = [], selectedList }) => {
     

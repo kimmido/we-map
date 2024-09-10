@@ -1,9 +1,8 @@
 import React, { useCallback, useState } from 'react';
-import Modal from '../../components/Modal';
+import Modal from '../../components/ui/Modal';
 import { insertList, updateList } from '../../utils/supabaseFatch';
 import MyListsColorPicker from './MyListsColorPicker';
-// import Modal from '../../components/Modal';
-import Button from '../../components/Button';
+import Button from '../../components/ui/Button';
 
 const MyListsEditor = ({ saveId, listConfig, setShowModal, saveList }) => {
     const [currentConfig] = useState(listConfig || {});

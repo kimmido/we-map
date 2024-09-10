@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SvgIconGoogle from '../components/SvgIconGoogle';
+import SvgIconGoogle from '../components/ui/SvgIconGoogle';
 
 
 const PlaceActionPanel = ({ id, phone, bookmark }) => {
