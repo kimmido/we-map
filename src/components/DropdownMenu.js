@@ -1,16 +1,16 @@
 import React from 'react';
 
-const FolderMenu = ({ children }) => {
+const DropdownMenu = ({ children }) => {
     return ( 
         <>
         <div className='transparentBackground'>
 
         </div>
-        <ul className='FolderMenu'>
+        <ul className='DropdownMenu'>
 
         </ul>
         </>
     );
 }
  
-export default FolderMenu;
+export default DropdownMenu;

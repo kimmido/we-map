@@ -1,26 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
+import SvgIconGoogle from '../components/SvgIconGoogle';
 
 
-const PlaceActionPanel = ({ id, phone }) => {
-    const path = {
-        bookmarkHeart: `<path d="M480-388q51-47 82.5-77.5T611-518q17-22 23-38.5t6-35.5q0-36-26-62t-62-26q-21 0-40.5 8.5T480-648q-12-15-31-23.5t-41-8.5q-36 0-62 26t-26 62q0 19 5.5 35t22.5 38q17 22 48 52.5t84 78.5ZM200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z"/>`
-    }
+const PlaceActionPanel = ({ id, phone, bookmark }) => {
+    function onClickBookmark() {
 
-    const color = {
-        default: '',
-        main: '#8CD790'
     }
 
     return ( 
         <div className='PlaceActionPanel'>
             <a className='placeActionBtn phone' href={`tel:${ phone }`}>
+                <SvgIconGoogle shape='call' />
                 <span>전화</span>
             </a>
-            <button className='placeActionBtn'>
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill={ color.main }>{ path.bookmarkHeart }</svg>
+            <button className='placeActionBtn' onClick={onClickBookmark}>
+                <SvgIconGoogle 
+                    shape={bookmark? 'bookmark_heart' : 'bookmark'}
+                    type={bookmark? 'check' : ''} />
                 <span>저장</span>
             </button>
             <a className='placeActionBtn' href={`https://map.kakao.com/link/to/${id}`} target='_blank'>
+                <SvgIconGoogle shape='turn_sharp_right' />
                 <span>길찾기</span>
             </a>
         </div>

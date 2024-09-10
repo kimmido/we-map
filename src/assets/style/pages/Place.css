@@ -10,28 +10,34 @@
   z-index: var(--z-index-map-overlay);
 }
 
+.PlacePopUp .placeAddress {
+  font-size: var(--font-size-body-sm);
+}
+
 .PlaceActionPanel {
   display: flex;
+  gap: var(--spacer-7);
   justify-content: space-between;
   height: 60px;
-  margin: var(--spacer-4) 0;
+  margin: var(--spacer-4);
 }
 
 .placeActionBtn {
   flex: 1;
   display: flex;
+  gap: var(--spacer-2);
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 var(--spacer-4);
+}
+
+.placeActionBtn .SvgIconGoogle {
+  width: 28px;
+  height: 28px;
+  /* background-color: darkblue; */
 }
 
 .placeActionBtn span {
   display: block;
-  margin-top: 24px;
+  font-size: var(--font-size-body-sm);
 }
-
-/* .placeActionBtn span::before {
-  display: block;
-  content: url(../../images/icon_bookmark.svg);
-  background-image: url(../../images/icon_bookmark.svg);
-} */

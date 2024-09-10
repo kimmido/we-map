@@ -43,6 +43,16 @@ html, body{
 
 html{
     font-size: var(--font-size-title-sm);
+    color: var(--gray-70);
+    background-color: var(--gray-20);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: var(--gray-90);
 }
 
@@ -70,7 +80,7 @@ input::placeholder {
 button {
     font-size: 100%;
     vertical-align: middle;
-    color: var(--gray-90);
+    color: var(--gray-70);
     background-color: transparent;
     border: 0 none;
     border-radius: var(--radius-square);

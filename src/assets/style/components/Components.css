@@ -171,3 +171,13 @@
 .LocationCount {
   color: var(--gray-50);
 }
+
+.SvgIconGoogle {
+  width: var(--size-icon);
+  height: var(--size-icon);
+  fill: var(--gray-60);
+}
+
+.SvgIconGoogle.check {
+  fill: var(--color-main);
+}
